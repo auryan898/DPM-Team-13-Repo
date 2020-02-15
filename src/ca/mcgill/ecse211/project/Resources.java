@@ -4,8 +4,10 @@ import com.auryan898.dpm.lejoscomm.BasicComm;
 import com.auryan898.dpm.lejoscomm.StringData;
 import lejos.hardware.ev3.EV3;
 import lejos.hardware.lcd.TextLCD;
+import lejos.hardware.motor.Motor;
 import lejos.hardware.sensor.EV3ColorSensor;
 import lejos.hardware.sensor.EV3UltrasonicSensor;
+import lejos.robotics.RegulatedMotor;
 import lejos.robotics.localization.OdometryPoseProvider;
 import lejos.robotics.navigation.MovePilot;
 import lejos.robotics.navigation.Pose;
@@ -19,24 +21,9 @@ import lejos.robotics.navigation.Pose;
  */
 public class Resources {
   
+  //--------------------Changeable Robot Parameters-----------------------
   /**
-   * The wrapper class for the text display, much easier to use.
-   */
-  public static Display display = null;
-  
-  /**
-   * The text display.
-   */
-  public static TextLCD lcd = null;
-  
-  /**
-   * The ev3 instance.
-   */
-  public static EV3 ev3 = null;
-  
-  
-  /**
-   * The width of the robot's base, the distance between the wheels, that touches the ground.
+   * The width of the robot's base, the distance between the point where they touch the ground.
    */
   public static float BASE_WIDTH = 11.25f;
   
@@ -45,7 +32,12 @@ public class Resources {
    */
   public static float TILE_WIDTH = 31.25f;
   
+  /**
+   * Ultrasonic sensor offset.
+   */
+  public static float US_OFFSET = (float)(0.074);
   
+  //--------------------Useful Robot Control Objects----------------------
   /**
    * The navigator that will direct the robot to certain waypoints.
    */
@@ -55,16 +47,6 @@ public class Resources {
    * The localizing class, simplified and optimized, derived from the last lab.
    */
   public static Localizer localizer = null;
-  
-  /**
-   * The ultrasonic sensor device.
-   */
-  public static EV3UltrasonicSensor ultrasonicSensorDevice;
-  
-  /**
-   * The color sensor device.
-   */
-  public static EV3ColorSensor colorSensorDevice;
   
   /**
    * The pilot that drives the robot.
@@ -77,10 +59,48 @@ public class Resources {
   public static OdometryPoseProvider odometry;
   
   /**
+   * The wrapper class for the text display, much easier to use.
+   */
+  public static Display display = null;
+  
+  //--------------------Lower-Level Control Objects-----------------------
+  /**
+   * The text display.
+   */
+  public static TextLCD lcd = null;
+  
+  /**
+   * The ev3 instance.
+   */
+  public static EV3 ev3 = null;
+  
+  /**
+   * The ultrasonic sensor device.
+   */
+  public static EV3UltrasonicSensor ultrasonicSensorDevice;
+  
+  /**
+   * The color sensor device.
+   */
+  public static EV3ColorSensor colorSensorDevice;
+  
+  /**
    * Communications object to send data to computer for debugging.
    */
   public static BasicComm comm = null;
   
+  /**
+   * The Left and Right motors.
+   */
+  public static RegulatedMotor motorLeft = Motor.A;
+  public static RegulatedMotor motorRight = Motor.D;
+  
+  /**
+   * a boolean to decide when to end the whole program.
+   */
+  public static boolean END_PROGRAM = false;
+  
+  //-------------Static Methods That Can Be Used Anywhere-----------------
   /**
    * Ensures the heading is [0,360) degrees instead of [-180,180].
    * It will work even if input is 0-360.

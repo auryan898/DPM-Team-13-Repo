@@ -20,6 +20,7 @@ import lejos.robotics.SampleProvider;
  */
 public class Localizer implements Runnable {
   private static final long T_INTERVAL = 10;
+  
   private SampleProvider ultrasensor;
   private SensorMode lightsensor;
   private float[] lightSample;
@@ -32,8 +33,8 @@ public class Localizer implements Runnable {
    */
   public Localizer() {
     // offset addition in meters, distance from center to sensor
-    ultrasensor = new AdditionFilter(ultrasonicSensorDevice.getDistanceMode(), (float)(0.074));
-    lightsensor = colorSensorDevice.getColorIDMode();
+    ultrasensor = new AdditionFilter(ultrasonicSensorDevice.getDistanceMode(), US_OFFSET);
+    lightsensor = colorSensorDevice.getRedMode();
     lightSample = new float[3];
     distSample = new float[1];
   }
@@ -42,7 +43,7 @@ public class Localizer implements Runnable {
    * The implemented run method for usage in a Thread.
    */
   public void run() {
-    while (true) {
+    while (!END_PROGRAM) {
       // Place localizer thread code here:
 
       

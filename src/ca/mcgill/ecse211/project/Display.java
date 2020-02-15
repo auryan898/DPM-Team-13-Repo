@@ -10,8 +10,9 @@ import static ca.mcgill.ecse211.project.Resources.*;
  *
  */
 public class Display implements Runnable {
-  private static final long T_INTERVAL = 100;
+  static final long T_INTERVAL = 100;
   private int lineIndex = 0;
+  private boolean shouldWait = false;
 
   /**
    * Display thread loop that display the status of several 
@@ -22,11 +23,15 @@ public class Display implements Runnable {
     resetIndex();
     writeNext("Nothing to see here.");
     
-    while (true) {
+    while (!END_PROGRAM) {
       resetIndex(1);
+      
       
       try {
         Thread.sleep(T_INTERVAL);
+        if (shouldWait) {
+          this.wait();
+        }
       } catch (InterruptedException e) {
         e.printStackTrace();
         break;
@@ -84,5 +89,12 @@ public class Display implements Runnable {
   public void writeNext(String line, int index) {
     lcd.clear(index);
     lcd.drawString(line, 0, index);
+  }
+
+  /**
+   * Tells the thread to wait, to be later notified and run again.
+   */
+  public void pause() {
+    shouldWait = true;
   }
 }
