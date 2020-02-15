@@ -25,7 +25,7 @@ public class Resources {
   /**
    * The width of the robot's base, the distance between the point where they touch the ground.
    */
-  public static float BASE_WIDTH = 11.25f;
+  public static float BASE_WIDTH = 9.88f;
   
   /**
    * Tile width.
@@ -35,7 +35,7 @@ public class Resources {
   /**
    * Ultrasonic sensor offset.
    */
-  public static float US_OFFSET = (float)(0.074);
+  public static float US_OFFSET = (float)(0.0665); // in meters
   
   //--------------------Useful Robot Control Objects----------------------
   /**

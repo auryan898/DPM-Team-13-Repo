@@ -24,12 +24,12 @@ import lejos.robotics.navigation.MovePilot;
  */
 public class Main {
   private static final long T_INTERVAL = 10;
-  public static double WHEEL_RADIUS = MovePilot.WHEEL_SIZE_EV3;
+  public static double WHEEL_RADIUS = 4.4;
 
   public static void main(String[] args) {
     initRobot();
     initNavigation();
-    
+    initSensor();
     MenuDisplay menu = new MenuDisplay();
     Thread display = new Thread(menu);
     // Thread display = new Thread(display);
@@ -72,5 +72,6 @@ public class Main {
     // Sensor Declaration
     ultrasonicSensorDevice = new EV3UltrasonicSensor(SensorPort.S1); // global resource
     colorSensorDevice = new EV3ColorSensor(SensorPort.S2); // global resource
+    localizer = new Localizer();
   }
 }

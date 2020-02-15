@@ -1,10 +1,8 @@
 package ca.mcgill.ecse211.project.tools;
 
-import static ca.mcgill.ecse211.project.Resources.END_PROGRAM;
-import static ca.mcgill.ecse211.project.Resources.display;
+import static ca.mcgill.ecse211.project.Resources.*;
 
 import java.util.ArrayList;
-
 import lejos.hardware.Button;
 import lejos.utility.TextMenu;
 
@@ -44,21 +42,21 @@ class SubMenu {
           display.resetIndex(2);
           display.writeNext(command.getStatus());
           display.writeNext("<<left -|+ right>>");
-          display.writeNext("Up:exit, Enter:act");
+          display.writeNext("Up:exit, Down:act");
 
-          switch (Button.waitForAnyPress()) {
+          switch (Button.getButtons()) {
             case Button.ID_LEFT:
               command.setStatus(-1);
               break;
             case Button.ID_RIGHT:
               command.setStatus(+1);
               break;
-            case Button.ID_ENTER:
+            case Button.ID_DOWN:
               command.action();
               break;
             case Button.ID_UP:
-            default:
               endAction = true;
+            default:
           }
           try {
             Thread.sleep(100);
@@ -74,18 +72,23 @@ class SubMenu {
   }
 
   public boolean select() {
-    addItem("exit this menu", new MenuAction() {
-      public boolean action() {
-        return true;
-      }
-    });
-    menu = new TextMenu((String[]) actionNames.toArray(), 1, this.title);
-    int choice;
+    String[] names = new String[actionNames.size()];
+    menu = new TextMenu(actionNames.toArray(names), 1, this.title);
+    int choice = 0;
     MenuAction chosen;
     boolean isExit = false;
     do {
-      choice = menu.select();
-      chosen = actions.get(choice);
+      choice = menu.select(choice);
+      lcd.clear();
+      if (choice == -1) {
+        isExit = true;
+      }
+      try {
+        chosen = actions.get(choice);
+        lcd.clear();
+      } catch (Exception e) {
+        chosen = null;
+      }
       if (chosen != null) {
         isExit = chosen.action(); // Run the action specified
       }
