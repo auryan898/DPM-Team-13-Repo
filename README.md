@@ -18,4 +18,3 @@ So, if you want to use this code efficiently, understand the following objects d
 - `comm` is from a [custom library](https://github.com/auryan898/EV3-Comm-Wrapper)
 - `navigation` is just from Lab 4
 - `display` is defined in the Display class
-
