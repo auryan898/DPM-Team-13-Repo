@@ -2,7 +2,9 @@ package ca.mcgill.ecse211.project.tools;
 
 import static ca.mcgill.ecse211.project.Resources.*;
 
+import ca.mcgill.ecse211.project.DemosMenu;
 import ca.mcgill.ecse211.project.Main;
+import ca.mcgill.ecse211.project.TestsMenu;
 import lejos.hardware.Button;
 import lejos.robotics.SampleProvider;
 import lejos.robotics.chassis.Chassis;
@@ -86,13 +88,7 @@ public class MenuDisplay implements Runnable {
    * @return return true to exit the parent menu. false to remain in parent menu.
    */
   protected boolean createDemoMenu() {
-    demoMenu = new SubMenu("Demo Actions");
-    demoMenu.addItem("First Map", new MenuAction() {
-      public boolean action() {
-        // place code here for the demo code.
-        return false;
-      }
-    });
+    demoMenu = new DemosMenu();
     return false;
   }
 
@@ -101,15 +97,7 @@ public class MenuDisplay implements Runnable {
    * @return return true to exit the parent menu. false to remain in parent menu.
    */
   protected boolean createTestMenu() {
-    testMenu = new SubMenu("Testing Runs");
-
-    // add menu actions from this point
-    testMenu.addItem("Test:Localize", new MenuAction() {
-      public boolean action() {
-        // place test code here.
-        return false;
-      }
-    });
+    testMenu = new TestsMenu();
 
     return false;
   }

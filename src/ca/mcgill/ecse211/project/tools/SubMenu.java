@@ -13,7 +13,7 @@ import lejos.utility.TextMenu;
  * @author Ryan Au auryan898@gmail.com
  *
  */
-class SubMenu {
+public class SubMenu {
 
   private String title;
   private TextMenu menu;
