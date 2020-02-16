@@ -2,9 +2,15 @@ package ca.mcgill.ecse211.project.tools;
 
 import static ca.mcgill.ecse211.project.Resources.*;
 
+import ca.mcgill.ecse211.project.DemosMenu;
 import ca.mcgill.ecse211.project.Main;
+import ca.mcgill.ecse211.project.TestsMenu;
 import lejos.hardware.Button;
 import lejos.robotics.SampleProvider;
+import lejos.robotics.chassis.Chassis;
+import lejos.robotics.chassis.Wheel;
+import lejos.robotics.chassis.WheeledChassis;
+import lejos.robotics.navigation.MovePilot;
 import lejos.robotics.navigation.Navigator;
 
 /**
@@ -50,18 +56,19 @@ public class MenuDisplay implements Runnable {
     mainMenu.addItem("Robot Status", new MenuAction() {
       public boolean action() {
         boolean endAction = false;
+        
         display.writeNext("Robot Status");
+        display.clear();
         while (!endAction) {
           display.resetIndex(1);
           display.writeNext("" + localizer.getRange(255));
-          display.writeNext("" + localizer.getColor());
+          display.writeNext("" + (localizer.getColor()[0]));
           display.writeNext(odometry.getPose().toString());
           display.writeNext(pilot.getAngularSpeed() + "|" + pilot.getAngularSpeed());
           display.writeNext(pilot.getLinearAcceleration() + "|" + pilot.getLinearSpeed());
           
-          if (Button.getKeyClickLength() > 1) {
+          if (Button.getButtons() == Button.ID_UP) {
             endAction = true;
-            break;
           }
           
           try {
@@ -70,6 +77,7 @@ public class MenuDisplay implements Runnable {
             break;
           }
         }
+        display.clear();
         return false;
       }
     });
@@ -80,13 +88,7 @@ public class MenuDisplay implements Runnable {
    * @return return true to exit the parent menu. false to remain in parent menu.
    */
   protected boolean createDemoMenu() {
-    demoMenu = new SubMenu("Demo Actions");
-    demoMenu.addItem("First Map", new MenuAction() {
-      public boolean action() {
-        // place code here for the demo code.
-        return false;
-      }
-    });
+    demoMenu = new DemosMenu();
     return false;
   }
 
@@ -95,15 +97,7 @@ public class MenuDisplay implements Runnable {
    * @return return true to exit the parent menu. false to remain in parent menu.
    */
   protected boolean createTestMenu() {
-    testMenu = new SubMenu("Testing Runs");
-
-    // add menu actions from this point
-    testMenu.addItem("Test:Localize", new MenuAction() {
-      public boolean action() {
-        // place test code here.
-        return false;
-      }
-    });
+    testMenu = new TestsMenu();
 
     return false;
   }
@@ -115,15 +109,6 @@ public class MenuDisplay implements Runnable {
     boolean isExit = false;
     display.pause();
     isExit = mainMenu.select();
-//    while (!END_PROGRAM && !isExit) {
-//
-//      try {
-//        Thread.sleep(T_INTERVAL);
-//      } catch (InterruptedException e) {
-//        e.printStackTrace();
-//        break;
-//      }
-//    }
     END_PROGRAM = isExit;
   }
 
@@ -137,7 +122,7 @@ public class MenuDisplay implements Runnable {
     // Tests Wheel Radius, it should move backwards one tile.
     calibrationMenu.addItem("Wheel Radius", new MenuCommand() {
       public void setStatus(int changeFactor) {
-        Main.WHEEL_RADIUS += changeFactor * .05;
+        Main.WHEEL_RADIUS += changeFactor * .01;
       }
 
       public String getStatus() {
@@ -145,11 +130,13 @@ public class MenuDisplay implements Runnable {
       }
 
       public void action() {
-        int angle = (int)(TILE_WIDTH / Main.WHEEL_RADIUS * 180 / Math.PI);
-        motorLeft.setSpeed(100);
-        motorRight.setSpeed(100);
-        motorLeft.rotate(-angle);
-        motorRight.rotate(-angle);
+        Wheel wheelLeft = WheeledChassis.modelWheel(motorLeft, Main.WHEEL_RADIUS).offset(-BASE_WIDTH / 2);
+        Wheel wheelRight = WheeledChassis.modelWheel(motorRight, Main.WHEEL_RADIUS).offset(BASE_WIDTH / 2);
+        Chassis chassis = new WheeledChassis(new Wheel[] { wheelLeft, wheelRight }, WheeledChassis.TYPE_DIFFERENTIAL);
+        MovePilot mover = new MovePilot(chassis);
+        mover.setLinearAcceleration(100);
+        mover.setLinearSpeed(100);
+        mover.travel(-TILE_WIDTH);
       }
     });
 
@@ -157,19 +144,26 @@ public class MenuDisplay implements Runnable {
     calibrationMenu.addItem("U.S Dist Offset", new MenuCommand() {
       private SampleProvider sampler = ultrasonicSensorDevice.getDistanceMode();
       private float[] buffer = { 0 };
-      private float offset = 0;
+      private float offset = US_OFFSET;
 
       public void setStatus(int changeFactor) {
-        offset += 0.2; // in centimeter
+        offset += 0.001 * changeFactor; // in centimeter
       }
 
       public String getStatus() {
         sampler.fetchSample(buffer, 0);
-        return TILE_WIDTH + "" + (buffer[0] * 100 + offset);
+        return "" + (offset * 100) + "|" + (buffer[0] * 100 + offset * 100);
       }
 
       public void action() {
-        pilot.travel(-TILE_WIDTH);
+        Wheel wheelLeft = WheeledChassis.modelWheel(motorLeft, Main.WHEEL_RADIUS).offset(-BASE_WIDTH / 2);
+        Wheel wheelRight = WheeledChassis.modelWheel(motorRight, Main.WHEEL_RADIUS).offset(BASE_WIDTH / 2);
+        Chassis chassis = new WheeledChassis(new Wheel[] { wheelLeft, wheelRight }, WheeledChassis.TYPE_DIFFERENTIAL);
+        MovePilot mover = new MovePilot(chassis);
+        
+        mover.setLinearAcceleration(70);
+        mover.setLinearSpeed(100);
+        mover.travel(-TILE_WIDTH + (buffer[0] * 100 + offset * 100));
       }
     });
 
@@ -182,14 +176,16 @@ public class MenuDisplay implements Runnable {
 
       public void setStatus(int changeFactor) {
         BASE_WIDTH += changeFactor * 0.01;
+        
       }
 
       public void action() {
-        int angle = (int)(BASE_WIDTH / Main.WHEEL_RADIUS);
-        motorLeft.setSpeed(100);
-        motorRight.setSpeed(100);
-        motorLeft.rotate(-angle);
-        motorRight.rotate(+angle);
+        Wheel wheelLeft = WheeledChassis.modelWheel(motorLeft, Main.WHEEL_RADIUS).offset(-BASE_WIDTH / 2);
+        Wheel wheelRight = WheeledChassis.modelWheel(motorRight, Main.WHEEL_RADIUS).offset(BASE_WIDTH / 2);
+        Chassis chassis = new WheeledChassis(new Wheel[] { wheelLeft, wheelRight }, WheeledChassis.TYPE_DIFFERENTIAL);
+        MovePilot mover = new MovePilot(chassis);
+        mover.setAngularSpeed(100);
+        mover.rotate(360);
       }
     });
 

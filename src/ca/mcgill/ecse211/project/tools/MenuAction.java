@@ -7,7 +7,7 @@ package ca.mcgill.ecse211.project.tools;
  * @author Ryan Au auryan898@gmail.com
  *
  */
-interface MenuAction {
+public interface MenuAction {
   
   /**
    * Do something.  Return false if you wish to stay in the current menu.  

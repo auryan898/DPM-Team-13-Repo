@@ -78,7 +78,7 @@ public class Localizer implements Runnable {
     if (range > threshold || Float.isInfinite(range) || Float.isNaN(range)) {
       range = -1;
     } // invalid range value
-    return range;
+    return range * 100;
   }
   
   /**
