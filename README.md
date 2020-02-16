@@ -19,13 +19,14 @@ You could be asked to explain parts of your process during the demo.
 5. Test your robot with the different demo scenarios mentioned in step 1. Don't forget to test edge cases.
 
 ---
+**About the Sample Code:**
 
-### See this repo's [javadoc](https://auryan898.github.io/DPM-Team-13-Repo/doc/)
+#### See this repo's [javadoc](https://auryan898.github.io/DPM-Team-13-Repo/doc/)
 
 ## How to use
 
-The template already includes indluded is a basic Localizer class, and a Navigation class, derived from the previous labs.  This code uses the built in features and classes that 
-are included in the LeJos source code, along with some other stuff custom stuff.  
+Included in the sample code is a basic Localizer class, and a Navigation class, derived from the previous labs.  This code uses the built in features and classes that 
+are included in the Lejos source code, along with some other custom stuff.  
 
 So, if you want to use this code efficiently, understand the following objects defined in `Resources`:
 
