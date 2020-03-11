@@ -2,6 +2,7 @@ package ca.mcgill.ecse211.project;
 
 import lejos.hardware.lcd.TextLCD;
 import static ca.mcgill.ecse211.project.LocalResources.*;
+import static ca.mcgill.ecse211.project.Resources.lcd;
 
 /**
  * Wrapper class for the TextLCD on the ev3 robot. Includes very useful methods 
@@ -97,11 +98,33 @@ public class Display implements Runnable {
     lcd.drawString(line, 0, index);
   }
   
-  
-  
+
+  /**
+   * Shows the text on the LCD, line by line.
+   * 
+   * @param strings comma-separated list of strings, one per line
+   */
+  public void showText(String... strings) {
+    lcd.clear();
+    for (int i = 0; i < strings.length; i++) {
+      lcd.drawString(strings[i], 0, i);
+    } // for loop
+  } // end showText method
+
+  /**
+   * unpauses the display.
+   */
   public void restart() {
     shouldWait = false;
     this.notify();
+  }
+  
+  /**
+   * unpauses the display.
+   * 
+   */
+  public void unpause() {
+    restart();
   }
 
   /**
