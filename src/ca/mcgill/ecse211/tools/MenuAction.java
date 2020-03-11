@@ -1,4 +1,4 @@
-package ca.mcgill.ecse211.project.menu;
+package ca.mcgill.ecse211.tools;
 
 /**
  * Interface where a single method action() is defined, something to do for a

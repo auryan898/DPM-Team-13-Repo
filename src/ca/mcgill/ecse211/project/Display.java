@@ -1,5 +1,6 @@
 package ca.mcgill.ecse211.project;
 
+import lejos.hardware.lcd.TextLCD;
 import static ca.mcgill.ecse211.project.LocalResources.*;
 
 /**
@@ -11,8 +12,13 @@ import static ca.mcgill.ecse211.project.LocalResources.*;
  */
 public class Display implements Runnable {
   static final long T_INTERVAL = 100;
-  private int lineIndex = 0;
-  private boolean shouldWait = false;
+  protected int lineIndex = 0;
+  protected boolean shouldWait = false;
+  protected TextLCD lcd;
+  
+  public Display(TextLCD lcd) {
+    this.lcd = lcd;
+  }
 
   /**
    * Display thread loop that display the status of several 
@@ -40,7 +46,7 @@ public class Display implements Runnable {
   }
   
   public void clear() {
-    lcd.clear();
+    this.lcd.clear();
     resetIndex();
   }
   
@@ -89,6 +95,13 @@ public class Display implements Runnable {
   public void writeNext(String line, int index) {
     lcd.clear(index);
     lcd.drawString(line, 0, index);
+  }
+  
+  
+  
+  public void restart() {
+    shouldWait = false;
+    this.notify();
   }
 
   /**

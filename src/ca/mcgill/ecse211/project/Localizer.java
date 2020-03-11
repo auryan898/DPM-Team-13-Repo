@@ -1,11 +1,12 @@
 package ca.mcgill.ecse211.project;
 
-import static ca.mcgill.ecse211.project.LocalResources.*;
+import static ca.mcgill.ecse211.project.LocalResources.END_PROGRAM;
+import static ca.mcgill.ecse211.project.LocalResources.absoluteHeading;
 
-import lejos.hardware.sensor.SensorMode;
 import lejos.robotics.RangeReading;
 import lejos.robotics.RangeReadings;
 import lejos.robotics.SampleProvider;
+import lejos.robotics.navigation.MovePilot;
 
 
 /**
@@ -27,12 +28,18 @@ public class Localizer implements Runnable {
   private float[] distSample;
   private long distReadInterval = 20;
 
+  private Navigation navigation;
+
+  private MovePilot pilot;
+
   /**
    * Initializes the Localizer instance, but also gets the sensor 
    * modes of the light and ultrasonic sensors.
    */
-  public Localizer(SampleProvider ultrasensor, SampleProvider lightsensor) {
+  public Localizer(SampleProvider ultrasensor, SampleProvider lightsensor, Navigation navigation, MovePilot pilot) {
     // offset addition in meters, distance from center to sensor
+    this.navigation = navigation;
+    this.pilot = pilot;
     this.ultrasensor = ultrasensor;
     this.lightsensor = lightsensor;
     lightSample = new float[3];

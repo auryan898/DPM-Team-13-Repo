@@ -1,4 +1,4 @@
-package ca.mcgill.ecse211.project.menu;
+package ca.mcgill.ecse211.tools;
 
 public interface MenuCommand {
   

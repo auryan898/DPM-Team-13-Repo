@@ -1,8 +1,9 @@
-package ca.mcgill.ecse211.project;
+package ca.mcgill.ecse211.project.menu;
 
 import static ca.mcgill.ecse211.project.LocalResources.*;
-import ca.mcgill.ecse211.project.menu.MenuAction;
-import ca.mcgill.ecse211.project.menu.SubMenu;
+
+import ca.mcgill.ecse211.tools.MenuAction;
+import ca.mcgill.ecse211.tools.SubMenu;
 
 public class DemosMenu extends SubMenu {
 

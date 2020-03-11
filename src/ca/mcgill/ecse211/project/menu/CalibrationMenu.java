@@ -4,7 +4,10 @@ import static ca.mcgill.ecse211.project.LocalResources.*;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+
 import ca.mcgill.ecse211.project.Main;
+import ca.mcgill.ecse211.tools.MenuCommand;
+import ca.mcgill.ecse211.tools.SubMenu;
 import lejos.robotics.SampleProvider;
 import lejos.robotics.chassis.Chassis;
 import lejos.robotics.chassis.Wheel;
@@ -15,9 +18,12 @@ public class CalibrationMenu extends SubMenu {
 
   public CalibrationMenu() {
     super("Calibration Tools");
+  }
 
+  public static SubMenu createCalibrations() {
+    CalibrationMenu menu = new CalibrationMenu();
     // Tests Wheel Radius, it should move backwards one tile.
-    this.addItem("Wheel Radius", new MenuCommand() {
+    menu.addItem("Wheel Radius", new MenuCommand() {
       public void setStatus(int changeFactor) {
         Main.WHEEL_RADIUS += changeFactor * .01;
       }
@@ -41,7 +47,7 @@ public class CalibrationMenu extends SubMenu {
     });
 
     // Tests Ultrasonic Distance. Test on known distance, (Tile?)
-    this.addItem("U.S Dist Offset", new MenuCommand() {
+    menu.addItem("U.S Dist Offset", new MenuCommand() {
       private SampleProvider sampler = ultrasonicSensorDevice.getDistanceMode();
       private float[] buffer = { 0 };
       private float offset = US_OFFSET;
@@ -72,7 +78,7 @@ public class CalibrationMenu extends SubMenu {
     });
 
     // Tests Base Width. Should rotate 360 deg.
-    this.addItem("Base Width", new MenuCommand() {
+    menu.addItem("Base Width", new MenuCommand() {
 
       public String getStatus() {
         return "" + BASE_WIDTH;
@@ -97,7 +103,7 @@ public class CalibrationMenu extends SubMenu {
       }
     });
 
-    this.addItem("Ultrasonic Comparer", new MenuCommand() {
+    menu.addItem("Ultrasonic Comparer", new MenuCommand() {
       private SampleProvider sampler = ultrasonicSensorDevice.getDistanceMode();
       private float[] buffer = { 0 };
       float storedDist = 0;
@@ -135,7 +141,7 @@ public class CalibrationMenu extends SubMenu {
       }
     });
 
-    this.addItem("Color Gaussian", new MenuCommand() {
+    menu.addItem("Color Gaussian", new MenuCommand() {
       ArrayList<Float[]> data = new ArrayList<>();
 
       SampleProvider rgbColor = colorSensorDevice.getRGBMode();
@@ -219,7 +225,7 @@ public class CalibrationMenu extends SubMenu {
         }
       }
     });
-
+    return menu;
   }
 
 }

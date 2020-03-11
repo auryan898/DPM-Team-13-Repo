@@ -1,8 +1,12 @@
-package ca.mcgill.ecse211.project;
+package ca.mcgill.ecse211.test;
 
-import static ca.mcgill.ecse211.project.LocalResources.*;
+import static ca.mcgill.ecse211.test.TestResources.*;
 
+import ca.mcgill.ecse211.project.Display;
+import ca.mcgill.ecse211.project.Localizer;
+import ca.mcgill.ecse211.project.Navigation;
 import ca.mcgill.ecse211.project.menu.MainMenu;
+import ca.mcgill.ecse211.tools.SubMenu;
 import lejos.hardware.ev3.LocalEV3;
 import lejos.hardware.motor.Motor;
 import lejos.hardware.motor.NXTRegulatedMotor;
@@ -23,22 +27,21 @@ import lejos.robotics.navigation.MovePilot;
  * @author Ryan Au auryan898@gmail.com
  *
  */
-public class Main {
-
+public class MainTester {
   // Every user made thread should define its own sleep interval
   private static final long T_INTERVAL = 10;
   public static double WHEEL_RADIUS = 4.4;
 
   public static void main(String[] args) {
     // Initializing code goes here.
-    initRobot(WHEEL_RADIUS, BASE_WIDTH, Motor.A, Motor.D); // Initialize all navigation and sensors
-    MainMenu mainMenu = MainMenu.createMainMenu();
-
-    // Start main thread
+    initRobot(WHEEL_RADIUS,BASE_WIDTH,Motor.A,Motor.D);
+    
+    SubMenu testsMenu = TestsMenu.createTests();
     while (!END_PROGRAM) {
-      END_PROGRAM = mainMenu.select();
+      END_PROGRAM = testsMenu.select();
 
       try {
+
         Thread.sleep(T_INTERVAL);
       } catch (InterruptedException e) {
         e.printStackTrace();
@@ -50,10 +53,6 @@ public class Main {
 
   public static void initRobot(double wheelRadius, double baseWidth, NXTRegulatedMotor motorLeft,
       NXTRegulatedMotor motorRight) {
-    ev3 = LocalEV3.get();
-    lcd = ev3.getTextLCD();
-    display = new Display(lcd);
-
     // The motors as "Wheels" with radii and position
     Wheel wheelLeft = WheeledChassis.modelWheel(motorLeft, wheelRadius).offset(baseWidth / 2);
     Wheel wheelRight = WheeledChassis.modelWheel(motorRight, wheelRadius).offset(-baseWidth / 2);
@@ -63,20 +62,12 @@ public class Main {
         WheeledChassis.TYPE_DIFFERENTIAL);
 
     // pilot directs the robot's movements and speed, controlling both motors
-    pilot = new MovePilot(chassis);
+    MovePilot pilot = new MovePilot(chassis);
 
     // OdometryPoseProvider tracks the movements performed by the pilot
     odometry = new OdometryPoseProvider(pilot);
 
     // Navigation combines odometry and pilot to move the robot
-    navigation = new Navigation(odometry, pilot);
-
-    // Initializing the sensors attached
-    ultrasonicSensorDevice = new EV3UltrasonicSensor(SensorPort.S1);
-    colorSensorDevice = new EV3ColorSensor(SensorPort.S2);
-
-    // Localizer combines sensors and navigation to determine the location
-    localizer = new Localizer(ultrasonicSensorDevice.getDistanceMode(),
-        colorSensorDevice.getRedMode(), navigation, pilot);
+    navigation = new Navigation(odometry, pilot, chassis);
   }
 }

@@ -1,6 +1,10 @@
 package ca.mcgill.ecse211.project;
 
-import static ca.mcgill.ecse211.project.LocalResources.*;
+import static ca.mcgill.ecse211.project.LocalResources.absoluteHeading;
+
+import lejos.robotics.chassis.Chassis;
+import lejos.robotics.localization.OdometryPoseProvider;
+import lejos.robotics.navigation.MovePilot;
 
 /**
  * A simple custom navigation class that can direct the robot to travel to 
@@ -10,7 +14,16 @@ import static ca.mcgill.ecse211.project.LocalResources.*;
  * @author Ryan Au auryan898@gmail.com
  *
  */
-public class Navigation {
+public class Navigation extends MovePilot {
+  
+  private OdometryPoseProvider odometry;
+  private MovePilot pilot;
+
+  public Navigation(OdometryPoseProvider odometry, MovePilot pilot, Chassis chassis) {
+    super(chassis);
+    this.odometry = odometry;
+    this.pilot = pilot;
+  }
   
   /**
    * This method causes the robot to travel to the absolute field location (x, y), specified in tile
@@ -26,8 +39,6 @@ public class Navigation {
     // arctan plus math to add 180 when theta is past 90 deg
     double theta = Math.toDegrees(Math.atan2(dy,dx));
     double distance = Math.sqrt(dx * dx + dy * dy);
-    
-    debug("(" + dx + "," + dy + ")" + distance + "|" + theta);
     
     this.turnTo(theta);
     pilot.travel((float)distance);
