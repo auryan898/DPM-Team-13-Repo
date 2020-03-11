@@ -19,10 +19,10 @@ public class Navigation extends MovePilot {
   private OdometryPoseProvider odometry;
   private MovePilot pilot;
 
-  public Navigation(OdometryPoseProvider odometry, MovePilot pilot, Chassis chassis) {
+  public Navigation(Chassis chassis) {
     super(chassis);
-    this.odometry = odometry;
-    this.pilot = pilot;
+    this.odometry = new OdometryPoseProvider(this);
+    pilot = this;
   }
   
   /**
@@ -54,5 +54,13 @@ public class Navigation extends MovePilot {
     float p1 = (float)(theta - heading) % 360;
     float turnAngle = Math.abs(p1) > 180 ? p1 - 360 * Math.signum(p1) : p1;
     pilot.rotate(turnAngle); // 
+  }
+
+  public OdometryPoseProvider getOdometry() {
+    return odometry;
+  }
+  
+  public MovePilot getPilot() {
+    return this;
   }
 }

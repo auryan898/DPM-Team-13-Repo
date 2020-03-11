@@ -61,13 +61,13 @@ public class MainTester {
     Chassis chassis = new WheeledChassis(new Wheel[] { wheelLeft, wheelRight },
         WheeledChassis.TYPE_DIFFERENTIAL);
 
-    // pilot directs the robot's movements and speed, controlling both motors
-    MovePilot pilot = new MovePilot(chassis);
-
-    // OdometryPoseProvider tracks the movements performed by the pilot
-    odometry = new OdometryPoseProvider(pilot);
-
     // Navigation combines odometry and pilot to move the robot
-    navigation = new Navigation(odometry, pilot, chassis);
+    navigation = new Navigation(chassis);
+
+    // pilot directs the robot's movements and speed, controlling both motors
+    pilot = navigation.getPilot();
+    
+    // odometry tracks the movements performed by the pilot
+    odometry = navigation.getOdometry();
   }
 }

@@ -1,6 +1,9 @@
 package ca.mcgill.ecse211.project;
 
 import static ca.mcgill.ecse211.project.LocalResources.*;
+import static ca.mcgill.ecse211.test.TestResources.navigation;
+import static ca.mcgill.ecse211.test.TestResources.odometry;
+import static ca.mcgill.ecse211.test.TestResources.pilot;
 
 import ca.mcgill.ecse211.project.menu.MainMenu;
 import lejos.hardware.ev3.LocalEV3;
@@ -62,15 +65,15 @@ public class Main {
     Chassis chassis = new WheeledChassis(new Wheel[] { wheelLeft, wheelRight },
         WheeledChassis.TYPE_DIFFERENTIAL);
 
-    // pilot directs the robot's movements and speed, controlling both motors
-    pilot = new MovePilot(chassis);
-
-    // OdometryPoseProvider tracks the movements performed by the pilot
-    odometry = new OdometryPoseProvider(pilot);
-
     // Navigation combines odometry and pilot to move the robot
-    navigation = new Navigation(odometry, pilot);
+    navigation = new Navigation(chassis);
 
+    // pilot directs the robot's movements and speed, controlling both motors
+    pilot = navigation.getPilot();
+    
+    // odometry tracks the movements performed by the pilot
+    odometry = navigation.getOdometry();
+    
     // Initializing the sensors attached
     ultrasonicSensorDevice = new EV3UltrasonicSensor(SensorPort.S1);
     colorSensorDevice = new EV3ColorSensor(SensorPort.S2);
@@ -78,5 +81,6 @@ public class Main {
     // Localizer combines sensors and navigation to determine the location
     localizer = new Localizer(ultrasonicSensorDevice.getDistanceMode(),
         colorSensorDevice.getRedMode(), navigation, pilot);
+    
   }
 }
