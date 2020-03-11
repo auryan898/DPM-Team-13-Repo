@@ -4,6 +4,8 @@ import ca.mcgill.ecse211.project.tools.MenuAction;
 import ca.mcgill.ecse211.project.tools.SubMenu;
 
 public class DemosMenu extends SubMenu {
+  
+  // test comment
 
   /**
    * Place all of your demo items here
