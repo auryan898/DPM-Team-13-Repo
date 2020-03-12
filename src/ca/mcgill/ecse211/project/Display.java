@@ -2,7 +2,6 @@ package ca.mcgill.ecse211.project;
 
 import lejos.hardware.lcd.TextLCD;
 import static ca.mcgill.ecse211.project.LocalResources.*;
-import static ca.mcgill.ecse211.project.Resources.lcd;
 
 /**
  * Wrapper class for the TextLCD on the ev3 robot. Includes very useful methods 

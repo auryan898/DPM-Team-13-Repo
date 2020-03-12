@@ -75,12 +75,14 @@ public class LocalResources {
   /**
    * The ultrasonic sensor device.
    */
-  public static EV3UltrasonicSensor ultrasonicSensorDevice;
+  public static EV3UltrasonicSensor ultrasonicSensor;
 
   /**
    * The color sensor device.
    */
-  public static EV3ColorSensor colorSensorDevice;
+  public static EV3ColorSensor colorSensor;
+  public static EV3ColorSensor lineDetectLeft;
+  public static EV3ColorSensor rightDetectLeft;
 
   /**
    * The Left and Right motors.

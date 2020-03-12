@@ -48,7 +48,7 @@ public class CalibrationMenu extends SubMenu {
 
     // Tests Ultrasonic Distance. Test on known distance, (Tile?)
     menu.addItem("U.S Dist Offset", new MenuCommand() {
-      private SampleProvider sampler = ultrasonicSensorDevice.getDistanceMode();
+      private SampleProvider sampler = ultrasonicSensor.getDistanceMode();
       private float[] buffer = { 0 };
       private float offset = US_OFFSET;
 
@@ -104,7 +104,7 @@ public class CalibrationMenu extends SubMenu {
     });
 
     menu.addItem("Ultrasonic Comparer", new MenuCommand() {
-      private SampleProvider sampler = ultrasonicSensorDevice.getDistanceMode();
+      private SampleProvider sampler = ultrasonicSensor.getDistanceMode();
       private float[] buffer = { 0 };
       float storedDist = 0;
       float storedPoint = 0;
@@ -144,7 +144,7 @@ public class CalibrationMenu extends SubMenu {
     menu.addItem("Color Gaussian", new MenuCommand() {
       ArrayList<Float[]> data = new ArrayList<>();
 
-      SampleProvider rgbColor = colorSensorDevice.getRGBMode();
+      SampleProvider rgbColor = colorSensor.getRGBMode();
       float[] buffer = { 0, 0, 0 };
       float[] mean = { 0, 0, 0 };
 

@@ -75,12 +75,12 @@ public class Main {
     odometry = navigation.getOdometry();
     
     // Initializing the sensors attached
-    ultrasonicSensorDevice = new EV3UltrasonicSensor(SensorPort.S1);
-    colorSensorDevice = new EV3ColorSensor(SensorPort.S2);
+    ultrasonicSensor = new EV3UltrasonicSensor(SensorPort.S1);
+    colorSensor = new EV3ColorSensor(SensorPort.S2);
 
     // Localizer combines sensors and navigation to determine the location
-    localizer = new Localizer(ultrasonicSensorDevice.getDistanceMode(),
-        colorSensorDevice.getRedMode(), navigation, pilot);
+    localizer = new Localizer(ultrasonicSensor.getDistanceMode(),
+        colorSensor.getRedMode(), navigation, pilot);
     
   }
 }
