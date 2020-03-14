@@ -1,8 +1,8 @@
 package ca.mcgill.ecse211.tools;
 
-import static ca.mcgill.ecse211.project.Resources.*;
-
 import java.util.ArrayList;
+
+import ca.mcgill.ecse211.project.Display;
 import lejos.hardware.Button;
 import lejos.utility.TextMenu;
 
@@ -19,6 +19,8 @@ public class SubMenu {
   private TextMenu menu;
   private ArrayList<MenuAction> actions;
   private ArrayList<String> actionNames;
+  protected Display display;
+  private boolean isExit;
 
   public SubMenu(String title) {
     this.title = title;
@@ -38,7 +40,7 @@ public class SubMenu {
         String statusTitle = title;
         boolean endAction = false;
         display.writeNext(statusTitle, 1);
-        while (!END_PROGRAM && !endAction) {
+        while (!isExit && !endAction) {
           display.resetIndex(2);
           display.writeNext(command.getStatus(), true);
           display.writeNext("<<left -|+ right>>");
@@ -76,10 +78,10 @@ public class SubMenu {
     menu = new TextMenu(actionNames.toArray(names), 1, this.title);
     int choice = 0;
     MenuAction chosen;
-    boolean isExit = false;
+    isExit = false;
     do {
       choice = menu.select(choice);
-      lcd.clear();
+      display.clear();
       if (choice == -1) {
         isExit = true;
       }
@@ -90,7 +92,7 @@ public class SubMenu {
       }
       if (chosen != null) {
         isExit = chosen.action(); // Run the action specified
-        lcd.clear();
+        display.clear();
       }
     } while (!isExit);
     return isExit;

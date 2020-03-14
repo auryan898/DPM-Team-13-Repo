@@ -83,8 +83,8 @@ public class Display implements Runnable {
    * @param line String to print out
    */
   public void writeNext(String line) {
-    writeNext(line,lineIndex);
-    lineIndex++;
+    writeNext(line,getLineIndex());
+    lineIndex = getLineIndex() + 1;
   }
   
   /**
@@ -109,6 +109,24 @@ public class Display implements Runnable {
       lcd.drawString(strings[i], 0, i);
     } // for loop
   } // end showText method
+  
+  /**
+   * Writes the String to the lcd screen, but writes a new line at each '\n' it finds. If wordWrap 
+   * is set to true, it will do this. It isn't actually word wrapping, but will properly start 
+   * a new line at each '\n'
+   * 
+   * @param line the string to be written
+   * @param wordWrap true to use this behavior
+   */
+  public void writeNext(String line, boolean wordWrap) {
+    if (!wordWrap) {
+      writeNext(line);
+    }
+    String[] lines = line.split("\n");
+    for (int i = 0; i < lines.length; i++) {
+      writeNext(lines[i]);
+    }
+  }
 
   /**
    * unpauses the display.
@@ -131,5 +149,9 @@ public class Display implements Runnable {
    */
   public void pause() {
     shouldWait = true;
+  }
+
+  public int getLineIndex() {
+    return lineIndex;
   }
 }
