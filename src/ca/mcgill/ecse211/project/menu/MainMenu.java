@@ -41,34 +41,6 @@ public class MainMenu extends SubMenu {
         return false;
       }
     });
-    menu.addItem("Robot Status", new MenuAction() {
-      public boolean action() {
-        boolean endAction = false;
-
-        display.writeNext("Robot Status");
-        display.clear();
-        while (!endAction) {
-          display.resetIndex(1);
-          display.writeNext("" + localizer.getRange(255));
-          display.writeNext("" + (localizer.getColor()[0]));
-          display.writeNext(odometry.getPose().toString());
-          display.writeNext(pilot.getAngularSpeed() + "|" + pilot.getAngularSpeed());
-          display.writeNext(pilot.getLinearAcceleration() + "|" + pilot.getLinearSpeed());
-
-          if (Button.getButtons() == Button.ID_UP) {
-            endAction = true;
-          }
-
-          try {
-            Thread.sleep(T_INTERVAL);
-          } catch (InterruptedException e) {
-            break;
-          }
-        }
-        display.clear();
-        return false;
-      }
-    });
     
     return menu;
   }

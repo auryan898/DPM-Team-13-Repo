@@ -1,12 +1,14 @@
 package ca.mcgill.ecse211.project;
 
-import static ca.mcgill.ecse211.project.LocalResources.END_PROGRAM;
-import static ca.mcgill.ecse211.project.LocalResources.absoluteHeading;
+import static ca.mcgill.ecse211.project.LocalResources.*;
 
 import lejos.robotics.RangeReading;
 import lejos.robotics.RangeReadings;
 import lejos.robotics.SampleProvider;
+import lejos.robotics.navigation.Move;
+import lejos.robotics.navigation.MoveListener;
 import lejos.robotics.navigation.MovePilot;
+import lejos.robotics.navigation.MoveProvider;
 
 
 /**
@@ -19,32 +21,13 @@ import lejos.robotics.navigation.MovePilot;
  * @author Ryan Au auryan898@gmail.com
  *
  */
-public class Localizer implements Runnable {
+public class Localizer implements Runnable, MoveListener {
   private static final long T_INTERVAL = 10;
   
-  private SampleProvider ultrasensor;
-  private SampleProvider lightsensor;
-  private float[] lightSample;
-  private float[] distSample;
+  private float[] lightLeftSample = new float[3];
+  private float[] lightRightSample = new float[3];
+  private float[] distSample = new float[1];
   private long distReadInterval = 20;
-
-  private Navigation navigation;
-
-  private MovePilot pilot;
-
-  /**
-   * Initializes the Localizer instance, but also gets the sensor 
-   * modes of the light and ultrasonic sensors.
-   */
-  public Localizer(SampleProvider ultrasensor, SampleProvider lightsensor, Navigation navigation, MovePilot pilot) {
-    // offset addition in meters, distance from center to sensor
-    this.navigation = navigation;
-    this.pilot = pilot;
-    this.ultrasensor = ultrasensor;
-    this.lightsensor = lightsensor;
-    lightSample = new float[3];
-    distSample = new float[1];
-  }
 
   /**
    * The implemented run method for usage in a Thread.
@@ -67,9 +50,18 @@ public class Localizer implements Runnable {
    * Fetches the color sensor sample and returns the array. 
    * @return the lightSample array size 3 for the possible different modes
    */
-  public float[] getColor() {
-    this.lightsensor.fetchSample(lightSample, 0);
-    return lightSample;
+  public float getLeftLightValue() {
+    lineDetectLeft.fetchSample(lightLeftSample, 0);
+    return lightLeftSample[0];
+  }
+  
+  /**
+   * Fetches the color sensor sample and returns the array. 
+   * @return the lightSample array size 3 for the possible different modes
+   */
+  public float getRightLightValue() {
+    lineDetectRight.fetchSample(lightRightSample, 0);
+    return lightRightSample[0];
   }
   
   /**
@@ -79,7 +71,7 @@ public class Localizer implements Runnable {
    * @return
    */
   public float getRange(float threshold) {
-    this.ultrasensor.fetchSample(distSample, 0);
+    ultrasonicSensor.fetchSample(distSample, 0);
     float range = distSample[0];
     if (range > threshold || Float.isInfinite(range) || Float.isNaN(range)) {
       range = -1;
@@ -127,5 +119,17 @@ public class Localizer implements Runnable {
     pilot.setAngularSpeed(oldSpeed);
 
     return readings;
+  }
+
+  @Override
+  public void moveStarted(Move event, MoveProvider mp) {
+    // TODO Auto-generated method stub
+    
+  }
+
+  @Override
+  public void moveStopped(Move event, MoveProvider mp) {
+    // TODO Auto-generated method stub
+    
   }
 }

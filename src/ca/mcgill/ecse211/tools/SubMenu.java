@@ -19,8 +19,8 @@ public class SubMenu {
   private TextMenu menu;
   private ArrayList<MenuAction> actions;
   private ArrayList<String> actionNames;
-  protected Display display;
   private boolean isExit;
+  protected Display display;
 
   public SubMenu(String title) {
     this.title = title;

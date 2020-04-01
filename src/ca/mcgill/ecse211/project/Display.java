@@ -14,11 +14,6 @@ public class Display implements Runnable {
   static final long T_INTERVAL = 100;
   protected int lineIndex = 0;
   protected boolean shouldWait = false;
-  protected TextLCD lcd;
-  
-  public Display(TextLCD lcd) {
-    this.lcd = lcd;
-  }
 
   /**
    * Display thread loop that display the status of several 
@@ -46,7 +41,7 @@ public class Display implements Runnable {
   }
   
   public void clear() {
-    this.lcd.clear();
+    lcd.clear();
     resetIndex();
   }
   

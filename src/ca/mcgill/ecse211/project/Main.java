@@ -27,14 +27,11 @@ import lejos.robotics.navigation.MovePilot;
  *
  */
 public class Main {
-
   // Every user made thread should define its own sleep interval
   private static final long T_INTERVAL = 10;
-  public static double WHEEL_RADIUS = 4.4;
 
   public static void main(String[] args) {
     // Initializing code goes here.
-    initRobot(WHEEL_RADIUS, BASE_WIDTH, Motor.A, Motor.D); // Initialize all navigation and sensors
     MainMenu mainMenu = MainMenu.createMainMenu();
 
     // Start main thread
@@ -49,38 +46,5 @@ public class Main {
       }
     }
 
-  }
-
-  public static void initRobot(double wheelRadius, double baseWidth, NXTRegulatedMotor motorLeft,
-      NXTRegulatedMotor motorRight) {
-    ev3 = LocalEV3.get();
-    lcd = ev3.getTextLCD();
-    display = new Display(lcd);
-
-    // The motors as "Wheels" with radii and position
-    Wheel wheelLeft = WheeledChassis.modelWheel(motorLeft, wheelRadius).offset(baseWidth / 2);
-    Wheel wheelRight = WheeledChassis.modelWheel(motorRight, wheelRadius).offset(-baseWidth / 2);
-
-    // Chassis combines those wheels together to make a vehicle
-    Chassis chassis = new WheeledChassis(new Wheel[] { wheelLeft, wheelRight },
-        WheeledChassis.TYPE_DIFFERENTIAL);
-
-    // Navigation combines odometry and pilot to move the robot
-    navigation = new Navigation(chassis);
-
-    // pilot directs the robot's movements and speed, controlling both motors
-    pilot = navigation.getPilot();
-    
-    // odometry tracks the movements performed by the pilot
-    odometry = navigation.getOdometry();
-    
-    // Initializing the sensors attached
-    ultrasonicSensor = new EV3UltrasonicSensor(SensorPort.S1);
-    colorSensor = new EV3ColorSensor(SensorPort.S2);
-
-    // Localizer combines sensors and navigation to determine the location
-    localizer = new Localizer(ultrasonicSensor.getDistanceMode(),
-        colorSensor.getRedMode(), navigation, pilot);
-    
   }
 }

@@ -21,7 +21,7 @@ public class DisplayTester {
   @Before
   public void setup() {
     System.setOut(new PrintStream(outStream));
-    LocalResources.display = new Display(new FakeTextLCD());
+    LocalResources.display = new Display();
     display = LocalResources.display;
   }
 

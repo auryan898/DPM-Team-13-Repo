@@ -13,8 +13,9 @@ import lejos.hardware.lcd.TextLCD;
  */
 public class TestDisplay extends ca.mcgill.ecse211.project.Display {
   
-  public TestDisplay(TextLCD lcd) {
-    super(lcd);
+  
+  public TestDisplay() {
+    super();
   }
 
   static final long T_INTERVAL = 100;

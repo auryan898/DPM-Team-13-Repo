@@ -5,6 +5,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import ca.mcgill.ecse211.project.LocalResources;
 import ca.mcgill.ecse211.project.Main;
 import ca.mcgill.ecse211.tools.MenuCommand;
 import ca.mcgill.ecse211.tools.SubMenu;
@@ -21,21 +22,21 @@ public class CalibrationMenu extends SubMenu {
   }
 
   public static SubMenu createCalibrations() {
-    CalibrationMenu menu = new CalibrationMenu();
+    final CalibrationMenu menu = new CalibrationMenu();
     // Tests Wheel Radius, it should move backwards one tile.
     menu.addItem("Wheel Radius", new MenuCommand() {
       public void setStatus(int changeFactor) {
-        Main.WHEEL_RADIUS += changeFactor * .01;
+        WHEEL_RADIUS += changeFactor * .01;
       }
 
       public String getStatus() {
-        return "" + Main.WHEEL_RADIUS;
+        return "" + WHEEL_RADIUS;
       }
 
       public void action() {
-        Wheel wheelLeft = WheeledChassis.modelWheel(motorLeft, Main.WHEEL_RADIUS)
+        Wheel wheelLeft = WheeledChassis.modelWheel(motorLeft, WHEEL_RADIUS)
             .offset(-BASE_WIDTH / 2);
-        Wheel wheelRight = WheeledChassis.modelWheel(motorRight, Main.WHEEL_RADIUS)
+        Wheel wheelRight = WheeledChassis.modelWheel(motorRight, WHEEL_RADIUS)
             .offset(BASE_WIDTH / 2);
         Chassis chassis = new WheeledChassis(new Wheel[] { wheelLeft, wheelRight },
             WheeledChassis.TYPE_DIFFERENTIAL);
@@ -48,7 +49,7 @@ public class CalibrationMenu extends SubMenu {
 
     // Tests Ultrasonic Distance. Test on known distance, (Tile?)
     menu.addItem("U.S Dist Offset", new MenuCommand() {
-      private SampleProvider sampler = ultrasonicSensor.getDistanceMode();
+      private SampleProvider sampler = ultrasonicSensor;
       private float[] buffer = { 0 };
       private float offset = US_OFFSET;
 
@@ -63,9 +64,9 @@ public class CalibrationMenu extends SubMenu {
       }
 
       public void action() {
-        Wheel wheelLeft = WheeledChassis.modelWheel(motorLeft, Main.WHEEL_RADIUS)
+        Wheel wheelLeft = WheeledChassis.modelWheel(motorLeft, WHEEL_RADIUS)
             .offset(-BASE_WIDTH / 2);
-        Wheel wheelRight = WheeledChassis.modelWheel(motorRight, Main.WHEEL_RADIUS)
+        Wheel wheelRight = WheeledChassis.modelWheel(motorRight, WHEEL_RADIUS)
             .offset(BASE_WIDTH / 2);
         Chassis chassis = new WheeledChassis(new Wheel[] { wheelLeft, wheelRight },
             WheeledChassis.TYPE_DIFFERENTIAL);
@@ -90,9 +91,9 @@ public class CalibrationMenu extends SubMenu {
       }
 
       public void action() {
-        Wheel wheelLeft = WheeledChassis.modelWheel(motorLeft, Main.WHEEL_RADIUS)
+        Wheel wheelLeft = WheeledChassis.modelWheel(motorLeft, WHEEL_RADIUS)
             .offset(-BASE_WIDTH / 2);
-        Wheel wheelRight = WheeledChassis.modelWheel(motorRight, Main.WHEEL_RADIUS)
+        Wheel wheelRight = WheeledChassis.modelWheel(motorRight, WHEEL_RADIUS)
             .offset(BASE_WIDTH / 2);
         Chassis chassis = new WheeledChassis(new Wheel[] { wheelLeft, wheelRight },
             WheeledChassis.TYPE_DIFFERENTIAL);
@@ -104,7 +105,7 @@ public class CalibrationMenu extends SubMenu {
     });
 
     menu.addItem("Ultrasonic Comparer", new MenuCommand() {
-      private SampleProvider sampler = ultrasonicSensor.getDistanceMode();
+      private SampleProvider sampler = ultrasonicSensor;
       private float[] buffer = { 0 };
       float storedDist = 0;
       float storedPoint = 0;
@@ -127,9 +128,9 @@ public class CalibrationMenu extends SubMenu {
       }
 
       public void action() {
-        Wheel wheelLeft = WheeledChassis.modelWheel(motorLeft, Main.WHEEL_RADIUS)
+        Wheel wheelLeft = WheeledChassis.modelWheel(motorLeft, WHEEL_RADIUS)
             .offset(-BASE_WIDTH / 2);
-        Wheel wheelRight = WheeledChassis.modelWheel(motorRight, Main.WHEEL_RADIUS)
+        Wheel wheelRight = WheeledChassis.modelWheel(motorRight, WHEEL_RADIUS)
             .offset(BASE_WIDTH / 2);
         Chassis chassis = new WheeledChassis(new Wheel[] { wheelLeft, wheelRight },
             WheeledChassis.TYPE_DIFFERENTIAL);
@@ -144,12 +145,12 @@ public class CalibrationMenu extends SubMenu {
     menu.addItem("Color Gaussian", new MenuCommand() {
       ArrayList<Float[]> data = new ArrayList<>();
 
-      SampleProvider rgbColor = colorSensor.getRGBMode();
+      SampleProvider rgbColor = colorSensor;
       float[] buffer = { 0, 0, 0 };
       float[] mean = { 0, 0, 0 };
 
       public void setStatus(int changeFactor) {
-        display.writeNext("Wait...", 2);
+        LocalResources.display.writeNext("Wait...", 2);
         try {
           Thread.sleep(1000); // A pause for stability
         } catch (InterruptedException e) {
@@ -179,7 +180,7 @@ public class CalibrationMenu extends SubMenu {
       }
 
       public void action() {
-        display.writeNext("Writing File...", 2);
+        LocalResources.display.writeNext("Writing File...", 2);
         makeFile();
         try {
           Thread.sleep(1000);
