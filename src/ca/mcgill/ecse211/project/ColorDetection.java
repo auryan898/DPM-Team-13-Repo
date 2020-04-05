@@ -2,15 +2,13 @@ package ca.mcgill.ecse211.project;
 
 import static ca.mcgill.ecse211.project.LocalResources.colorSensor;
 
-import lejos.robotics.SampleProvider;
-
 /**
  * This class detects the color of an object. To minimize the undesirable variations in sensor 
  * recordings, this class will average several color samples, normalize its RGB value and then 
  * compare it to experimental data acquired beforehand. The error is modeled as normal distributions
  * and so the color is determined by selecting the smallest z-score.
  *  
- * @author normankong
+ * @author Norman Kong, Kaustav Das Sharma, Ryan Au
  */
 
 public class ColorDetection {
@@ -50,8 +48,14 @@ public class ColorDetection {
                                              0.010435169138117529f, 
                                              0.02413623650437421f};
   
-  /** The light sensor device. */
-  private static SampleProvider lightsensor;
+  /** The maximum threshold for light values. */
+  private static final float MAX_LIGHT_VALUE = 0.99f;
+  
+  /** The minimum threshold for brightness of sample. */
+  private static final float MIN_BRIGHTNESS_LEVEL = 0.035f;
+  
+  /** number of samples read, averaged for accuracy. */
+  private static final int NUM_SAMPLES_READ = 20;
   
   /** The light sample to be classified. */
   private static float[] lightSample;
@@ -61,22 +65,22 @@ public class ColorDetection {
    * 
    * @return an array that stores the mean RGB value.
    */
-  public static float[] getColorSamples() {
-    lightsensor = colorSensor;
+  public static float[] getColorSamples(int numSamples) {
+    
     lightSample = new float[3];
     float red = 0;
     float green = 0;
     float blue = 0;
-    for (int i = 0; i < 20; i++) {
-      lightsensor.fetchSample(lightSample, 0);
-      red += (lightSample[0] >= .99) ? 0 : lightSample[0];
-      green += (lightSample[1] >= .99) ? 0 : lightSample[1];
-      blue += (lightSample[2] >= .99) ? 0 : lightSample[2];
+    for (int i = 0; i < numSamples; i++) {
+      colorSensor.fetchSample(lightSample, 0);
+      red += (lightSample[0] >= MAX_LIGHT_VALUE) ? 0 : lightSample[0];
+      green += (lightSample[1] >= MAX_LIGHT_VALUE) ? 0 : lightSample[1];
+      blue += (lightSample[2] >= MAX_LIGHT_VALUE) ? 0 : lightSample[2];
     }
 
-    float redAverage = red / 20;
-    float greenAverage = green / 20;
-    float blueAverage = blue / 20;
+    float redAverage = red / numSamples;
+    float greenAverage = green / numSamples;
+    float blueAverage = blue / numSamples;
     
     float normalize = (float) Math.sqrt(power(redAverage, 2) 
                                         + power(greenAverage, 2) 
@@ -112,7 +116,7 @@ public class ColorDetection {
     float groundScore = calcZScore(x, GROUND_MEAN, GROUND_STD);
     
     float brightness = (x[3]);
-    if (brightness < 0.035 || brightness > 1) {
+    if (brightness < MIN_BRIGHTNESS_LEVEL || brightness > 1) {
       return "None";
     }
     if (greenScore < yellowScore && greenScore < orangeScore && greenScore < blueScore 
@@ -160,10 +164,12 @@ public class ColorDetection {
   }
 
   /**
-   * Returns ring color.
+   * Returns ring color as a String name.
+   * 
+   * @return None, Green, Orange, Blue, Yellow, or Ground
    */
   public static String getRingColour() {
-    return ColorDetection.determineColor(ColorDetection.getColorSamples());
+    return ColorDetection.determineColor(ColorDetection.getColorSamples(NUM_SAMPLES_READ));
   }
   
 }
