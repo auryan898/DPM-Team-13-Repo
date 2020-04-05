@@ -30,11 +30,12 @@ import lejos.robotics.navigation.Pose;
  */
 public class LocalResources {
 
-  // Set these as appropriate for your team and current situation
+  // --------------------Adjustable Wifi Settings--------------------------
+  public static final String bob = FieldLayouts.getString("LocalResources.0"); //$NON-NLS-1$
   /**
    * The default server IP used by the profs and TA's.
    */
-  public static final String DEFAULT_SERVER_IP = "192.168.2.3";
+  public static final String DEFAULT_SERVER_IP = "192.168.2.3"; //$NON-NLS-1$
   
   /**
    * The IP address of the server that transmits data to the robot. For the beta demo and
@@ -42,7 +43,7 @@ public class LocalResources {
    * 
    * <p>{@code public static final String SERVER_IP = DEFAULT_SERVER_IP;}
    */
-  public static final String SERVER_IP = "192.168.2.3"; // = DEFAULT_SERVER_IP;
+  public static final String SERVER_IP = "192.168.2.3"; // = DEFAULT_SERVER_IP; //$NON-NLS-1$
   
   /**
    * Your team number.
@@ -154,41 +155,42 @@ public class LocalResources {
     navigation.addMoveListener(localizer);
     
     // This static initializer MUST be declared before any Wi-Fi parameters.
+    // wifiParameters = FieldLayouts.getLayout("ca.mcgill.ecse211.project.fieldlayout1");
     receiveWifiParameters();
   }
   
   /** Red team number. */
-  public static int redTeam = getWP("RedTeam");
+  public static int redTeam = getWP("RedTeam"); //$NON-NLS-1$
 
   /** Red team's starting corner. */
-  public static int redCorner = getWP("RedCorner");
+  public static int redCorner = getWP("RedCorner"); //$NON-NLS-1$
 
   /** Green team number. */
-  public static int greenTeam = getWP("GreenTeam");
+  public static int greenTeam = getWP("GreenTeam"); //$NON-NLS-1$
 
   /** Green team's starting corner. */
-  public static int greenCorner = getWP("GreenCorner");
+  public static int greenCorner = getWP("GreenCorner"); //$NON-NLS-1$
 
   /** The Red Zone. */
-  public static Region red = makeRegion("Red");
+  public static Region red = makeRegion("Red"); //$NON-NLS-1$
 
   /** The Green Zone. */
-  public static Region green = makeRegion("Green");
+  public static Region green = makeRegion("Green"); //$NON-NLS-1$
 
   /** The Island. */
-  public static Region island = makeRegion("Island");
+  public static Region island = makeRegion("Island"); //$NON-NLS-1$
 
   /** The red tunnel footprint. */
-  public static Region tnr = makeRegion("TNR");
+  public static Region tnr = makeRegion("TNR"); //$NON-NLS-1$
 
   /** The green tunnel footprint. */
-  public static Region tng = makeRegion("TNG");
+  public static Region tng = makeRegion("TNG"); //$NON-NLS-1$
 
   /** The red search zone. */
-  public static Region szr = makeRegion("SZR");
+  public static Region szr = makeRegion("SZR"); //$NON-NLS-1$
 
   /** The green search zone. */
-  public static Region szg = makeRegion("SZG");
+  public static Region szg = makeRegion("SZG"); //$NON-NLS-1$
   
 
   /**
@@ -199,7 +201,7 @@ public class LocalResources {
     if (!RECEIVE_WIFI_PARAMS || wifiParameters != null) {
       return;
     }
-    System.out.println("Waiting to receive Wi-Fi parameters.");
+    System.out.println("Waiting to receive Wi-Fi parameters."); //$NON-NLS-1$
 
     // Connect to server and get the data, catching any errors that might occur
     try (WifiConnection conn =
@@ -212,7 +214,7 @@ public class LocalResources {
        */
       wifiParameters = conn.getData();
     } catch (Exception e) {
-      System.err.println("Error: " + e.getMessage());
+      System.err.println("Error: " + e.getMessage()); //$NON-NLS-1$
     }
   }
   
@@ -234,14 +236,14 @@ public class LocalResources {
    * Makes a point given a Wi-Fi parameter prefix.
    */
   public static Point makePoint(String paramPrefix) {
-    return new Point(getWP(paramPrefix + "_x"), getWP(paramPrefix + "_y"));
+    return new Point(getWP(paramPrefix + "_x"), getWP(paramPrefix + "_y")); //$NON-NLS-1$ //$NON-NLS-2$
   }
   
   /**
    * Makes a region given a Wi-Fi parameter prefix.
    */
   public static Region makeRegion(String paramPrefix) {
-    return new Region(makePoint(paramPrefix + "_LL"), makePoint(paramPrefix + "_UR"));
+    return new Region(makePoint(paramPrefix + "_LL"), makePoint(paramPrefix + "_UR")); //$NON-NLS-1$ //$NON-NLS-2$
   }
   
   public static Navigation initNavigation(float wheelRadius, float baseWidth,

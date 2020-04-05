@@ -10,12 +10,12 @@ import lejos.robotics.navigation.MoveListener;
 import lejos.robotics.navigation.MovePilot;
 import lejos.robotics.navigation.MoveProvider;
 
-
 /**
- * Base localizer class that can read distances, color light values, 
- * and has a distance scanning method.  
+ * Base localizer class that can read distances, color light values,
+ * and has a distance scanning method.
  * 
- * <p>It is best to use the odometry, pilot, and navigation static 
+ * <p>
+ * It is best to use the odometry, pilot, and navigation static
  * instances to control/manage the robot's movement.
  * 
  * @author Ryan Au auryan898@gmail.com
@@ -23,7 +23,7 @@ import lejos.robotics.navigation.MoveProvider;
  */
 public class Localizer implements Runnable, MoveListener {
   private static final long T_INTERVAL = 10;
-  
+
   private float[] lightLeftSample = new float[3];
   private float[] lightRightSample = new float[3];
   private float[] distSample = new float[1];
@@ -45,29 +45,31 @@ public class Localizer implements Runnable, MoveListener {
       }
     }
   }
-  
+
   /**
-   * Fetches the color sensor sample and returns the array. 
+   * Fetches the color sensor sample and returns the array.
+   * 
    * @return the lightSample array size 3 for the possible different modes
    */
   public float getLeftLightValue() {
     lineDetectLeft.fetchSample(lightLeftSample, 0);
     return lightLeftSample[0];
   }
-  
+
   /**
-   * Fetches the color sensor sample and returns the array. 
+   * Fetches the color sensor sample and returns the array.
+   * 
    * @return the lightSample array size 3 for the possible different modes
    */
   public float getRightLightValue() {
     lineDetectRight.fetchSample(lightRightSample, 0);
     return lightRightSample[0];
   }
-  
+
   /**
    * Gets the range detected by the ultrasonic sensor, within a given threshold.
    * 
-   * @param threshold the cm threshold of the range sensor
+   * @param  threshold the cm threshold of the range sensor
    * @return
    */
   public float getRange(float threshold) {
@@ -78,19 +80,20 @@ public class Localizer implements Runnable, MoveListener {
     } // invalid range value
     return range * 100;
   }
-  
+
   /**
    * Does a scan starting from one heading, stopping at regular intervals and
    * waiting, until it reaches another heading.
    * 
-   * @param startAngle    - starting heading
-   * @param angleAmount   - ending heading
-   * @param intervalAngle - angle to stop at each interval
-   * @param speed         - the angular speed for each interval turn
-   * @param threshold     - the maximum cm distance to read, invalid is value -1
-   * @return the distance detected at each degree interval, starting from 0
+   * @param  startAngle    - starting heading
+   * @param  angleAmount   - ending heading
+   * @param  intervalAngle - angle to stop at each interval
+   * @param  speed         - the angular speed for each interval turn
+   * @param  threshold     - the maximum cm distance to read, invalid is value -1
+   * @return               the distance detected at each degree interval, starting
+   *                       from 0
    */
-  public RangeReadings scanDist(float startAngle, float angleAmount, float intervalAngle, 
+  public RangeReadings scanDist(float startAngle, float angleAmount, float intervalAngle,
       double speed, float threshold) {
 
     intervalAngle = absoluteHeading(intervalAngle);
@@ -123,13 +126,15 @@ public class Localizer implements Runnable, MoveListener {
 
   @Override
   public void moveStarted(Move event, MoveProvider mp) {
-    // TODO Auto-generated method stub
-    
+    // TODO: Fill this provided moveListener method to localize and alter the
+    // robot's position with each movement
+
   }
 
   @Override
   public void moveStopped(Move event, MoveProvider mp) {
-    // TODO Auto-generated method stub
-    
+    // TODO: Fill this provided moveListener method to localize and alter the
+    // robot's position with each movement
+
   }
 }
