@@ -123,6 +123,8 @@ public class Localizer implements Runnable, MoveListener {
 
     return readings;
   }
+  
+  // TODO: **Include localize in place methods
 
   @Override
   public void moveStarted(Move event, MoveProvider mp) {
