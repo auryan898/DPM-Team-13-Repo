@@ -23,6 +23,7 @@ public class MainMenu extends SubMenu {
     super("Competition");
   }
 
+  // TODO: javadoc
   public static MainMenu createMainMenu() {
     final MainMenu menu = new MainMenu();
     

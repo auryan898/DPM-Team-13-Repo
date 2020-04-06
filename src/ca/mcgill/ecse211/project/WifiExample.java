@@ -29,6 +29,7 @@ import lejos.hardware.Button;
  * 
  * @author Michael Smith, Tharsan Ponnampalam, Younes Boubekeur
  */
+@Deprecated
 public class WifiExample {
   
   /**

@@ -56,6 +56,7 @@ public class Navigation extends MovePilot {
     pilot.rotate(turnAngle); // 
   }
 
+  // TODO: javadoc
   public OdometryPoseProvider getOdometry() {
     return odometry;
   }

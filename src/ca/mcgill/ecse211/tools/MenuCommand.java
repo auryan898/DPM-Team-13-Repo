@@ -1,5 +1,7 @@
 package ca.mcgill.ecse211.tools;
 
+
+// TODO: javadoc
 public interface MenuCommand {
   
   /**

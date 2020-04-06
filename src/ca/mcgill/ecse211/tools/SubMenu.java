@@ -22,6 +22,7 @@ public class SubMenu {
   private boolean isExit;
   protected Display display;
 
+  // TODO: javadoc
   public SubMenu(String title) {
     this.title = title;
     this.actions = new ArrayList<MenuAction>();

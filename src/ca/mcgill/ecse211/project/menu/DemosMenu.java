@@ -13,6 +13,8 @@ public class DemosMenu extends SubMenu {
   private DemosMenu() {
     super("Run the Demos");
   }
+  
+  // TODO: javadoc
   public static SubMenu createDemos() {
     SubMenu menu = new DemosMenu();
     
