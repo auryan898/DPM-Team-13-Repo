@@ -19,6 +19,10 @@ public class Navigation extends MovePilot {
   private OdometryPoseProvider odometry;
   private MovePilot pilot;
 
+  /**
+   * TODO: javadocs
+   * @param chassis
+   */
   public Navigation(Chassis chassis) {
     super(chassis);
     this.odometry = new OdometryPoseProvider(this);

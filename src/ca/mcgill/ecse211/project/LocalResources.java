@@ -108,6 +108,11 @@ public class LocalResources {
    * The odometry tracker.
    */
   public static OdometryPoseProvider odometry;
+  
+  /**
+   * The searching class.
+   */
+  public static Search search;
 
   // --------------------Lower-Level Control Objects-----------------------
   /**

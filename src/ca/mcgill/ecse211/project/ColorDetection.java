@@ -164,11 +164,11 @@ public class ColorDetection {
   }
 
   /**
-   * Returns ring color as a String name.
+   * Returns object color as a String name.
    * 
    * @return None, Green, Orange, Blue, Yellow, or Ground
    */
-  public static String getRingColour() {
+  public static String getObjectColor() {
     return ColorDetection.determineColor(ColorDetection.getColorSamples(NUM_SAMPLES_READ));
   }
   
