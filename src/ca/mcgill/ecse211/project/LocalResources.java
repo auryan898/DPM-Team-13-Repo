@@ -95,6 +95,16 @@ public class LocalResources {
   public static Localizer localizer = new Localizer();
 
   /**
+   * The searching class.
+   */
+  public static Search search = new Search();
+  
+  /**
+   * The attachment class.
+   */
+  public static Attachment lift = new Attachment();
+  
+  /**
    * The navigator that will direct the robot to certain waypoints.
    */
   public static Navigation navigation;
@@ -108,11 +118,6 @@ public class LocalResources {
    * The odometry tracker.
    */
   public static OdometryPoseProvider odometry;
-  
-  /**
-   * The searching class.
-   */
-  public static Search search;
 
   // --------------------Lower-Level Control Objects-----------------------
   /**
