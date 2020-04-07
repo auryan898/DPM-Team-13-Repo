@@ -3,6 +3,13 @@ package pctest;
 import lejos.hardware.lcd.Font;
 import lejos.hardware.lcd.TextLCD;
 
+/**
+ * A mock TextLCD class for displaying data to the console on a PC, instead of
+ * on the EV3.
+ * 
+ * @author Ryan Au
+ *
+ */
 public class FakeTextLCD implements TextLCD {
 
   private int width = 8;
@@ -21,20 +28,12 @@ public class FakeTextLCD implements TextLCD {
   }
 
   @Override
-  public void clear() {
-    for (int row = 0; row < pixels.length; row++) {
-      clear(row);
-    }
-  }
-
-  @Override
   public int getWidth() {
     return width;
   }
 
   @Override
   public int getHeight() {
-    // TODO Auto-generated method stub
     return height;
   }
 
@@ -83,8 +82,9 @@ public class FakeTextLCD implements TextLCD {
 
   @Override
   public void drawChar(char c, int x, int y) {
-    if (x < width && y < height)
+    if (x < width && y < height) {
       pixels[y][x] = c;
+    }
     refresh();
   }
 
@@ -105,24 +105,30 @@ public class FakeTextLCD implements TextLCD {
 
   @Override
   public void drawInt(int i, int x, int y) {
-    drawString(i+"",x,y);
+    drawString(i + "", x, y);
   }
 
   @Override
   public void drawInt(int i, int places, int x, int y) {
-    drawString(i+"",x,y);
+    drawString(i + "", x, y);
   }
 
   @Override
   public void clear(int x, int y, int n) {
-    // TODO Auto-generated method stub
-
+    for (int col = x; col < n && y < height && col < pixels[y].length; col++) {
+      pixels[y][col] = ' ';
+    }
   }
 
   @Override
   public void clear(int y) {
-    for (int col = 0; y < height && col < pixels[y].length; col++) {
-      pixels[y][col] = ' ';
+    clear(0, y, pixels[0].length);
+  }
+
+  @Override
+  public void clear() {
+    for (int row = 0; row < pixels.length; row++) {
+      clear(row);
     }
   }
 

@@ -2,16 +2,17 @@ package ca.mcgill.ecse211.project.menu;
 
 import static ca.mcgill.ecse211.project.LocalResources.*;
 
+import ca.mcgill.ecse211.project.LocalResources;
 import ca.mcgill.ecse211.tools.MenuAction;
 import ca.mcgill.ecse211.tools.SubMenu;
 
 public class DemosMenu extends SubMenu {
 
   /**
-   * Place all of your demo items here
+   * Place all of your demo items here.
    */
   private DemosMenu() {
-    super("Run the Demos");
+    super("Run the Demos",LocalResources.display);
   }
   
   // TODO: javadoc

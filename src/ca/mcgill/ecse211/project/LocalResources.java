@@ -33,7 +33,7 @@ public class LocalResources {
   /**
    * The default server IP used by the profs and TA's.
    */
-  public static final String DEFAULT_SERVER_IP = "192.168.2.3"; //$NON-NLS-1$
+  public static final String DEFAULT_SERVER_IP = "192.168.2.3"; 
 
   /**
    * The IP address of the server that transmits data to the robot. For the beta
@@ -42,7 +42,7 @@ public class LocalResources {
    * 
    * <p>{@code public static final String SERVER_IP = DEFAULT_SERVER_IP;}
    */
-  public static final String SERVER_IP = "192.168.2.3"; // = DEFAULT_SERVER_IP; //$NON-NLS-1$
+  public static final String SERVER_IP = "192.168.2.3"; // = DEFAULT_SERVER_IP; 
 
   /**
    * Your team number.
@@ -169,37 +169,37 @@ public class LocalResources {
   }
 
   /** Red team number. */
-  public static int redTeam = getWP("RedTeam"); //$NON-NLS-1$
+  public static int redTeam = getWP("RedTeam"); 
 
   /** Red team's starting corner. */
-  public static int redCorner = getWP("RedCorner"); //$NON-NLS-1$
+  public static int redCorner = getWP("RedCorner"); 
 
   /** Green team number. */
-  public static int greenTeam = getWP("GreenTeam"); //$NON-NLS-1$
+  public static int greenTeam = getWP("GreenTeam"); 
 
   /** Green team's starting corner. */
-  public static int greenCorner = getWP("GreenCorner"); //$NON-NLS-1$
+  public static int greenCorner = getWP("GreenCorner"); 
 
   /** The Red Zone. */
-  public static Region red = makeRegion("Red"); //$NON-NLS-1$
+  public static Region red = makeRegion("Red"); 
 
   /** The Green Zone. */
-  public static Region green = makeRegion("Green"); //$NON-NLS-1$
+  public static Region green = makeRegion("Green"); 
 
   /** The Island. */
-  public static Region island = makeRegion("Island"); //$NON-NLS-1$
+  public static Region island = makeRegion("Island"); 
 
   /** The red tunnel footprint. */
-  public static Region tnr = makeRegion("TNR"); //$NON-NLS-1$
+  public static Region tnr = makeRegion("TNR"); 
 
   /** The green tunnel footprint. */
-  public static Region tng = makeRegion("TNG"); //$NON-NLS-1$
+  public static Region tng = makeRegion("TNG"); 
 
   /** The red search zone. */
-  public static Region szr = makeRegion("SZR"); //$NON-NLS-1$
+  public static Region szr = makeRegion("SZR"); 
 
   /** The green search zone. */
-  public static Region szg = makeRegion("SZG"); //$NON-NLS-1$
+  public static Region szg = makeRegion("SZG"); 
 
   /**
    * Receives Wi-Fi parameters from the server program.
@@ -209,7 +209,7 @@ public class LocalResources {
     if (!RECEIVE_WIFI_PARAMS || wifiParameters != null) {
       return;
     }
-    System.out.println("Waiting to receive Wi-Fi parameters."); //$NON-NLS-1$
+    System.out.println("Waiting to receive Wi-Fi parameters."); 
 
     // Connect to server and get the data, catching any errors that might occur
     try (
@@ -225,7 +225,7 @@ public class LocalResources {
        */
       wifiParameters = conn.getData();
     } catch (Exception e) {
-      System.err.println("Error: " + e.getMessage()); //$NON-NLS-1$
+      System.err.println("Error: " + e.getMessage()); 
     }
   }
 

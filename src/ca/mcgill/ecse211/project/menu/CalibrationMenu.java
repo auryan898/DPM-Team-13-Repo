@@ -18,7 +18,7 @@ import lejos.robotics.navigation.MovePilot;
 public class CalibrationMenu extends SubMenu {
 
   public CalibrationMenu() {
-    super("Calibration Tools");
+    super("Calibration Tools",LocalResources.display);
   }
   // TODO: javadoc
   public static SubMenu createCalibrations() {

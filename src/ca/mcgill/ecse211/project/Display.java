@@ -45,6 +45,7 @@ public class Display implements Runnable {
     resetIndex();
   }
   
+  // TODO: javadoc
   public void resetIndex(int val) {
     this.lineIndex = val;
   }
