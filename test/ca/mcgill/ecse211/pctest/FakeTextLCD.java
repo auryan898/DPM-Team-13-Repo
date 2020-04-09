@@ -1,4 +1,4 @@
-package pctest;
+package ca.mcgill.ecse211.pctest;
 
 import lejos.hardware.lcd.Font;
 import lejos.hardware.lcd.TextLCD;

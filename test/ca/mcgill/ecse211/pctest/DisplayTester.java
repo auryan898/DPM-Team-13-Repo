@@ -1,4 +1,4 @@
-package pctest;
+package ca.mcgill.ecse211.pctest;
 
 import static org.junit.Assert.*;
 
@@ -11,6 +11,7 @@ import org.junit.Test;
 
 import ca.mcgill.ecse211.project.Display;
 import ca.mcgill.ecse211.project.LocalResources;
+import ca.mcgill.ecse211.test.TestDisplay;
 
 public class DisplayTester {
 
@@ -21,7 +22,7 @@ public class DisplayTester {
   @Before
   public void setup() {
     System.setOut(new PrintStream(outStream));
-    LocalResources.display = new Display();
+    LocalResources.display = new TestDisplay();
     display = LocalResources.display;
   }
 
