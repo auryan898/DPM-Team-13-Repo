@@ -10,6 +10,7 @@ import lejos.robotics.navigation.MoveListener;
 import lejos.robotics.navigation.MovePilot;
 import lejos.robotics.navigation.MoveProvider;
 
+
 /**
  * Base localizer class that can read distances, color light values,
  * and has a distance scanning method.
@@ -26,7 +27,7 @@ public class Localizer implements Runnable, MoveListener {
   private float[] lightLeftSample = new float[3];
   private float[] lightRightSample = new float[3];
   private float[] distSample = new float[1];
-  private long distReadInterval = 20;
+  private static long distReadInterval = 20;
 
   /**
    * The implemented run method for usage in a Thread.
@@ -73,13 +74,25 @@ public class Localizer implements Runnable, MoveListener {
    */
   public float getRange(float threshold) {
     ultrasonicSensor.fetchSample(distSample, 0);
-    float range = distSample[0];
+    return getRange(threshold,distSample[0]);
+  }
+
+  
+  /**
+   * Gets the range detected by the ultrasonic sensor, within a given threshold.
+   * FOR TEST PURPOSE ONLY.
+   * 
+   * @param  threshold the cm threshold of the range sensor
+   * @param range detected by ultrasonic sensor
+   * @return
+   */
+  public static float getRange(float threshold, float range) {
     if (range > threshold || Float.isInfinite(range) || Float.isNaN(range)) {
       range = -1;
     } // invalid range value
     return range * 100;
   }
-
+  
   /**
    * Does a scan starting from one heading, stopping at regular intervals and
    * waiting, until it reaches another heading.
@@ -112,7 +125,7 @@ public class Localizer implements Runnable, MoveListener {
       readings.add(new RangeReading(absoluteHeading(accHeading + startAngle), range));
 
       try {
-        Thread.sleep(distReadInterval);
+        Thread.sleep(getDistReadInterval());
       } catch (InterruptedException e) {
         e.printStackTrace();
         break;
@@ -137,5 +150,13 @@ public class Localizer implements Runnable, MoveListener {
     // TODO: Fill this provided moveListener method to localize and alter the
     // robot's position with each movement
 
+  }
+
+  public static long getDistReadInterval() {
+    return distReadInterval;
+  }
+
+  public void setDistReadInterval(long distReadInterval) {
+    this.distReadInterval = distReadInterval;
   }
 }

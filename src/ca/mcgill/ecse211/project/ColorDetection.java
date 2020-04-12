@@ -92,13 +92,35 @@ public class ColorDetection {
     return output;
   } 
   
+  /** TEST ONLY.
+   * Takes in 20 color samples and returns their average.
+   * 
+   * @return an array that stores the mean RGB value.
+   */
+  public static float[] getColorSamples(int numSamples, float red, float green, float blue) {
+    lightSample = new float[3];
+
+    float redAverage = red / numSamples;
+    float greenAverage = green / numSamples;
+    float blueAverage = blue / numSamples;
+    
+    float normalize = (float) Math.sqrt(power(redAverage, 2) 
+                                        + power(greenAverage, 2) 
+                                        + power(blueAverage, 2));
+
+    float[] output = {(redAverage / normalize), 
+                      (greenAverage / normalize), 
+                      (blueAverage / normalize), normalize};
+    return output;
+  } 
+  
   /**
    * Returns a to the power of b.
    * @param a the base
    * @param b the exponent
    * @return a to the power of b
    */
-  private static float power(float a, float b) {
+  public static float power(float a, float b) {
     return (float) (Math.pow(a, b));
   }
   
@@ -116,6 +138,37 @@ public class ColorDetection {
     float groundScore = calcZScore(x, GROUND_MEAN, GROUND_STD);
     
     float brightness = (x[3]);
+    if (brightness < MIN_BRIGHTNESS_LEVEL || brightness > 1) {
+      return "None";
+    }
+    if (greenScore < yellowScore && greenScore < orangeScore && greenScore < blueScore 
+        && greenScore < groundScore) {
+      return "Green";
+    } else if (yellowScore < greenScore && yellowScore < orangeScore && yellowScore < blueScore
+        && yellowScore < groundScore) {
+      return "Yellow";
+    } else if (orangeScore < yellowScore && orangeScore < greenScore && orangeScore < blueScore
+        && orangeScore < groundScore) {
+      return "Orange";
+    } else if (blueScore < yellowScore && blueScore < greenScore && blueScore < orangeScore
+        && blueScore < groundScore) {
+      return "Blue";
+    } else if (groundScore < blueScore && groundScore < yellowScore && groundScore < greenScore
+        && groundScore < orangeScore) {
+      return "Ground";
+    }
+    return "None";
+  }
+  
+  /** TEST ONLY.
+   * Determines the color of a given RGB value based on a z-score calculation.
+   * 
+   * @param x A given RGB value stored in a float array of the form [R value, G value, B value].
+   * @return Returns the color of the given RGB value as a String.
+   */
+  public static String determineColor(float x, float greenScore, float yellowScore, float orangeScore, float blueScore, float groundScore) {
+    
+    float brightness = x;
     if (brightness < MIN_BRIGHTNESS_LEVEL || brightness > 1) {
       return "None";
     }
