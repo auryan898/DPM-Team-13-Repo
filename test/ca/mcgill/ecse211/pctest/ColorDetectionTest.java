@@ -5,27 +5,29 @@ import static org.junit.Assert.*;
 import ca.mcgill.ecse211.project.ColorDetection;
 import org.junit.Test;
 
-/*
- * To test the software logic without robot, our team split the methods into
- * logic
- * and readings. Later, we tested the logic using Junit. Whenever we could not
- * avoid a statement that needs hardware, we commented out the line.
- * Any methods under testClasses are for debugging purposes and should not be
- * modified. Otherwise, there maybe unexpected change in test results.
+/**
+ * This is a JUnit test for Color Detection math and logic. This test can be run
+ * individually or along with all of the tests using {@link RunAllTests}
+ * 
+ * <p>
+ * Note: This test is designed to be run on a PC/Computer, not an EV3.
+ * 
+ * @see ca.mcgill.ecse211.project.ColorDetection
  */
 public class ColorDetectionTest {
-  /*
-   * power(float a, float b) tests
+  /**
+   * This tests
+   * {@link ca.mcgill.ecse211.project.ColorDetection#power(float, float)}.
    */
-  // Success
   @Test
   public void powerTest() {
     float actual = ColorDetection.power(2, 2);
     assertEquals(4f, actual, 0.001);
   }
 
-  /*
-   * getColorSamples(int numSamples, float red, float green, float blue) tests
+  /**
+   * This tests
+   * {@link ca.mcgill.ecse211.project.ColorDetection#getColorSamples(int, float, float, float)}.
    */
   @Test
   public void getColorSamplesTest() {
@@ -33,11 +35,12 @@ public class ColorDetectionTest {
     assertArrayEquals(new float[] { 0.8797352f, 0.42782912f, 0.20743231f, 0.10798704f }, actuals,
         0.0001f);
   }
-  /*
-   * String determineColor(float[] x, float greenScore, float yellowScore, float
-   * orangeScore, float blueScore, float groundScore) tests
-   */
 
+  /**
+   * This tests
+   * {@link ca.mcgill.ecse211.project.ColorDetection#determineColor(float, float, float, float, float, float)}.
+   * Performed for the color green.
+   */
   @Test
   public void determineColorTestGreen() {
 
@@ -45,6 +48,11 @@ public class ColorDetectionTest {
     assertEquals("Green", actual);
   }
 
+  /**
+   * This tests
+   * {@link ca.mcgill.ecse211.project.ColorDetection#determineColor(float, float, float, float, float, float)}.
+   * Performed for the color yellow.
+   */
   @Test
   public void determineColorTestYellow() {
 
@@ -52,6 +60,11 @@ public class ColorDetectionTest {
     assertEquals("Yellow", actual);
   }
 
+  /**
+   * This tests
+   * {@link ca.mcgill.ecse211.project.ColorDetection#determineColor(float, float, float, float, float, float)}.
+   * Performed for the color orange.
+   */
   @Test
   public void determineColorTestOrange() {
 
@@ -59,6 +72,11 @@ public class ColorDetectionTest {
     assertEquals("Orange", actual);
   }
 
+  /**
+   * This tests
+   * {@link ca.mcgill.ecse211.project.ColorDetection#determineColor(float, float, float, float, float, float)}.
+   * Performed for the color blue.
+   */
   @Test
   public void determineColorTestBlue() {
 
@@ -66,6 +84,11 @@ public class ColorDetectionTest {
     assertEquals("Blue", actual);
   }
 
+  /**
+   * This tests
+   * {@link ca.mcgill.ecse211.project.ColorDetection#determineColor(float, float, float, float, float, float)}.
+   * Performed for the color of the grey blue playing field ground.
+   */
   @Test
   public void determineColorTestGround() {
 
@@ -73,6 +96,12 @@ public class ColorDetectionTest {
     assertEquals("Ground", actual);
   }
 
+  /**
+   * This tests
+   * {@link ca.mcgill.ecse211.project.ColorDetection#determineColor(float, float, float, float, float, float)}.
+   * Performed for the default None, when none of the colors should be tested.
+   * Ensures, no false-positives.
+   */
   @Test
   public void determineColorTestNonTargetColor() {
 
@@ -81,7 +110,6 @@ public class ColorDetectionTest {
 
     actual = ColorDetection.determineColor(5f, 1f, 5f, 3f, 4f, 2f);
     assertEquals("None", actual);
-    
 
     actual = ColorDetection.determineColor(0.00001f, 1f, 1f, 3f, 4f, 2f);
     assertEquals("None", actual);

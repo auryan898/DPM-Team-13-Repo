@@ -10,6 +10,14 @@ import org.junit.Test;
 import org.junit.After;
 import org.junit.Before;
 
+/**
+ * This is a JUnit test to check the integrity of the FieldLayouts class, but
+ * also of any particular layouts, verifying fieldlayout1.properties by
+ * default.
+ * 
+ * @author Ryan Au
+ *
+ */
 public class FieldLayoutsUnitTest {
   private static String[] expectedLayoutKeys = {
       "RedTeam",
@@ -48,6 +56,9 @@ public class FieldLayoutsUnitTest {
 
   HashMap<String, BigDecimal> layout;
 
+  /**
+   * Initializing the layout parameters.
+   */
   @Before
   public void setupFirstLayout() {
     layout = FieldLayouts
@@ -55,18 +66,28 @@ public class FieldLayoutsUnitTest {
 
   }
 
+  /**
+   * Tests that there are as many items in the layout as there are expected keys.
+   */
   @Test
   public void testStoredLayoutLengths() {
-    assertEquals(32, layout.size());
+    assertEquals(expectedLayoutKeys.length, layout.size());
   }
 
+  /**
+   * Tests that the expected keys are contained in the layout.
+   * 
+   */
   @Test
   public void testStoredLayoutKeys() {
     for (String key : expectedLayoutKeys) {
       assertTrue(layout.containsKey(key));
     }
   }
-  
+
+  /**
+   * Removes the layout.
+   */
   @After
   public void destroy() {
     layout = null;

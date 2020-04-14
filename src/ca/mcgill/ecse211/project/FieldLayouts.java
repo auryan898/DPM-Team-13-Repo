@@ -20,10 +20,10 @@ import java.util.ResourceBundle;
  * 
  * <p>
  * Example:
- * { @code
+ * <pre>
  * wifiParameters = FieldLayouts.getPlayingFieldLayout(resource_path);
  * receiveWifiParameters(); // This is now skipped because of the previous line
- * }
+ * </pre>
  * 
  * @author Ryan Au
  *

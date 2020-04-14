@@ -20,14 +20,15 @@ import lejos.hardware.Button;
  * 
  * <p>
  * Example of adding a new menu option:
- * {@code 
+ *
+ * <pre>
  * menu.addItem("Title of option", new MenuAction() {
  *   public boolean action() {
  *     System.out.println("I called a method from a menu item");
  *     return false; // return true to exit the current menu
- * }
+ *   }
  * });
- * }
+ * </pre>
  * 
  * @author Ryan Au auryan898@gmail.com
  */
@@ -51,9 +52,9 @@ public class MainMenu extends SubMenu {
    * running the program gets to pick which commands to run at the times they wish
    * via the menu displayed on the LCD of the EV3.
    *
-   * <p>
-   * see @see ca.mcgill.ecse211.tools.MenuAction and see @see
-   * ca.mcgill.ecse211.tools.MenuCommand for more information on actions.
+   * 
+   * @see    ca.mcgill.ecse211.tools.MenuCommand
+   * @see    ca.mcgill.ecse211.tools.MenuAction
    * 
    * @return Returns the same instance of MainMenu every time.
    */

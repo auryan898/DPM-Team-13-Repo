@@ -21,8 +21,7 @@ import ca.mcgill.ecse211.tools.SubMenu;
  * and it does not need to be used for this purpose. Instead, every routine can
  * be stored in the DemosMenu.
  * 
- * See @see ca.mcgill.ecse211.project.menu.DemosMenu for examples on using this
- * menu system.
+ * @see    ca.mcgill.ecse211.project.menu.DemosMenu
  * 
  * @author Ryan Au
  */

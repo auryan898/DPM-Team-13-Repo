@@ -15,21 +15,25 @@ import ca.mcgill.ecse211.tools.SubMenu;
  * This menu is intended to store menu options for controlling the robot for any
  * sort of test or demo that integrates or operates the other aspects of the
  * robot. An example is provided below, and in the code:
- * { @code
+ * 
+ * <pre>
  * menu.addItem("SquareDriveDemo", new MenuAction() {
- * public boolean action() {
- * // Any of the static resources from LocalResources can be used
- * navigation.travel(4 * TILE_WIDTH);
- * navigation.rotate(-90);
- * navigation.travel(4 * TILE_WIDTH);
- * navigation.rotate(-90);
- * navigation.travel(4 * TILE_WIDTH);
- * navigation.rotate(-90);
- * navigation.travel(4 * TILE_WIDTH);
- * return false;
- * }
+ *   public boolean action() {
+ *     // Any of the static resources from LocalResources can be used
+ *     navigation.travel(4 * TILE_WIDTH);
+ *     navigation.rotate(-90);
+ *     navigation.travel(4 * TILE_WIDTH);
+ *     navigation.rotate(-90);
+ *     navigation.travel(4 * TILE_WIDTH);
+ *     navigation.rotate(-90);
+ *     navigation.travel(4 * TILE_WIDTH);
+ *     return false;
+ *   }
  * });
- * }
+ * </pre>
+ * 
+ * @see    ca.mcgill.ecse211.tools.MenuAction
+ * @see    ca.mcgill.ecse211.tools.MenuCommand
  * 
  * @author Ryan Au
  */
@@ -51,9 +55,8 @@ public class DemosMenu extends SubMenu {
    * running the program gets to pick which commands to run at the times they wish
    * via the menu displayed on the LCD of the EV3.
    *
-   * <p>
-   * see @see ca.mcgill.ecse211.tools.MenuAction and see @see
-   * ca.mcgill.ecse211.tools.MenuCommand for more information on actions.
+   * @see    ca.mcgill.ecse211.tools.MenuAction
+   * @see    ca.mcgill.ecse211.tools.MenuCommand
    * 
    * @return Returns the same instance of DemosMenu every time.
    */
@@ -104,5 +107,6 @@ public class DemosMenu extends SubMenu {
    */
   protected static void wifiUsageDemo() {
     System.out.println(tnr.getHeight() + ":Length of Red Tunnel");
+    
   }
 }

@@ -26,25 +26,25 @@ import lejos.robotics.navigation.MovePilot;
  * This menu is intended to store menu options for calibrating the robot's coded
  * parameters of its physical design. An example using MenuCommand is provided
  * below, and many more are stored in this class:
- * { @code
+ * 
+ * <pre>
  * menu.addItem("SquareDriveDemo", new MenuCommand() {
+ *   public String getStatus() {
+ *     return "" + BASE_WIDTH;
+ *   }
  * 
- * public String getStatus() {
- * return "" + BASE_WIDTH;
- * }
+ *   public void setStatus(int changeFactor) {
+ *     BASE_WIDTH += Math.signum(changeFactor) * 0.01;
+ *   }
  * 
- * public void setStatus(int changeFactor) {
- * BASE_WIDTH += Math.signum(changeFactor) * 0.01;
- * }
- * 
- * public void action() {
- * updateNavigation();
- * localNavigation.setAngularSpeed(100);
- * localNavigation.setAngularAcceleration(50);
- * localNavigation.rotate(360);
- * }
+ *   public void action() {
+ *     updateNavigation();
+ *     localNavigation.setAngularSpeed(100);
+ *     localNavigation.setAngularAcceleration(50);
+ *     localNavigation.rotate(360);
+ *   }
  * });
- * }
+ * </pre>
  * 
  * @author Ryan Au
  */
@@ -78,15 +78,17 @@ public class CalibrationMenu extends SubMenu {
    * Creates and returns an instance of SubMenu that contains menu items specific
    * to the CalibrationMenu in the form of MenuAction instances or MenuCommand
    * instances.
+   * <p>
    * Each of these actions are essentially run in the main thread, but the user
    * running the program gets to pick which commands to run at the times they wish
    * via the menu displayed on the LCD of the EV3.
    *
-   * <p>
-   * see @see ca.mcgill.ecse211.tools.MenuAction and see @see
-   * ca.mcgill.ecse211.tools.MenuCommand for more information on actions.
    * 
-   * @return Returns the same instance of CalibrationMenu every time.
+   * @see    ca.mcgill.ecse211.tools.MenuAction
+   * @see    ca.mcgill.ecse211.tools.MenuCommand
+   * 
+   * @return Returns the same instance of
+   *         CalibrationMenu every time.
    */
   public static SubMenu getInstance() {
     if (menu != null) {
