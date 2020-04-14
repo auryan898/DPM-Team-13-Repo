@@ -24,6 +24,10 @@ import lejos.robotics.navigation.Pose;
  * Static resources available to all classes via the import line:
  * import static ca.mcgill.ecse211.project.Resources.*;
  * 
+ * <p>This class stores information for the robot (eg, BASE_WIDTH) and contains the object 
+ * instances of various tools, such as a Search object, Attachment, etc. This class also contains 
+ * the methods and information necessary to update its game parameters via wifi.
+ * 
  * @author Ryan Au auryan898@gmail.com
  *
  */

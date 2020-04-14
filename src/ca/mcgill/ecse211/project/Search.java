@@ -11,7 +11,8 @@ import java.util.ArrayList;
  * <p>The robot will rotate and read ultrasonic distances to detect where the stranded vehicle
  * might be. It will then travel to that waypoint and determine whether or not it is the vehicle. If
  * it is, it will call the attachment method. If not, it will perform a new scan and continue to the
- * next detected objects. 
+ * next detected objects. For documentation on algorithms to be implemented, see section 5.3 Search
+ * Algorithm from the "Software Documentation Final" document.
  * 
  * @author Norman Kong, Ryan Au, Kaustav Das Sharma
  *

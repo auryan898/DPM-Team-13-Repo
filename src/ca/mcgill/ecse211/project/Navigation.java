@@ -7,9 +7,12 @@ import lejos.robotics.localization.OdometryPoseProvider;
 import lejos.robotics.navigation.MovePilot;
 
 /**
- * A simple custom navigation class that can direct the robot to travel to 
- * an x and y (cm) and turn to any angle heading, positive or negative angle.
- * Forward should be 90 degrees, and right is 0 degrees.
+ * A simple custom navigation class that can direct the robot to travel to an x and y (cm) and turn 
+ * to any angle heading, positive or negative angle. Forward should be 90 degrees, and right is 0 
+ * degrees.
+ * 
+ * <p>See sections 2.3, 3.0, 5.1 and 5.2 from the "Software Documentation Final" document for 
+ * how the class is used and algorithms to be implemented. 
  * 
  * @author Ryan Au auryan898@gmail.com
  *

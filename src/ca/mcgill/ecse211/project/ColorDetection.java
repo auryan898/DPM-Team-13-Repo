@@ -3,10 +3,12 @@ package ca.mcgill.ecse211.project;
 import static ca.mcgill.ecse211.project.LocalResources.colorSensor;
 
 /**
- * This class detects the color of an object. To minimize the undesirable variations in sensor 
- * recordings, this class will average several color samples, normalize its RGB value and then 
- * compare it to experimental data acquired beforehand. The error is modeled as normal distributions
- * and so the color is determined by selecting the smallest z-score.
+ * This class detects the color of an object. 
+ * 
+ * <p>To minimize the undesirable variations in sensor recordings, this class will average several 
+ * color samples, normalize its RGB value and then compare it to experimental data acquired 
+ * beforehand. The error is modeled as normal distributions and so the color is determined by 
+ * selecting the smallest z-score. See section 5.0 Methodologies in the "SYSTEM Final" document. 
  *  
  * @author Norman Kong, Kaustav Das Sharma, Ryan Au
  */
