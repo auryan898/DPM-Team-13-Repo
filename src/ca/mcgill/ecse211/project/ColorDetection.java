@@ -168,7 +168,8 @@ public class ColorDetection {
    * @param x A given RGB value stored in a float array of the form [R value, G value, B value].
    * @return Returns the color of the given RGB value as a String.
    */
-  public static String determineColor(float x, float greenScore, float yellowScore, float orangeScore, float blueScore, float groundScore) {
+  public static String determineColor(float x, float greenScore, float yellowScore, 
+                                      float orangeScore, float blueScore, float groundScore) {
     
     float brightness = x;
     if (brightness < MIN_BRIGHTNESS_LEVEL || brightness > 1) {
