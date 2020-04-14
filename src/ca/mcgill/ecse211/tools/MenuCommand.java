@@ -22,7 +22,7 @@ public interface MenuCommand {
   public String getStatus();
 
   /**
-   * Change your value based on this factor. It usually gives -1 or +1,
+   * Change your value based on this factor. It usually passes -1 or +1,
    * so the value can be incremented or decremented.
    * 
    * @param changeFactor -1 for left button or +1 for right button

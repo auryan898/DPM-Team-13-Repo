@@ -6,8 +6,13 @@ import lejos.hardware.Button;
 import lejos.utility.TextMenu;
 
 /**
- * A menu that allows the user to add actions/methods as items to the list
- * instead of just strings as is the case with lejos.utility.TextMenu.
+ * Creates a menu that allows the user to add actions/methods as items to the
+ * list displayed on the EV3.
+ * 
+ * <p>
+ * This menu system can be extended by first instantiating a SubMenu object,
+ * then performing addItem() on this object to add menu items. These menu items
+ * are always objects that implement the MenuAction and MenuCommand interfaces.
  * 
  * @author Ryan Au auryan898@gmail.com
  *
@@ -104,8 +109,7 @@ public class SubMenu {
    * interactive. A menu item can be chosen, then the user can exit back into the
    * previous menu.
    * 
-   * @return true indicates this menu exited properly, false if something weird
-   *         happens
+   * @return true indicates this menu exited properly, false if the menu fails
    */
   public boolean select() {
     String[] names = new String[actionNames.size()];
