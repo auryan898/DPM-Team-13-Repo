@@ -6,16 +6,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import ca.mcgill.ecse211.project.LocalResources;
-import ca.mcgill.ecse211.project.Main;
 import ca.mcgill.ecse211.project.Navigation;
-import ca.mcgill.ecse211.tools.MenuAction;
 import ca.mcgill.ecse211.tools.MenuCommand;
 import ca.mcgill.ecse211.tools.SubMenu;
 import lejos.robotics.SampleProvider;
-import lejos.robotics.chassis.Chassis;
-import lejos.robotics.chassis.Wheel;
-import lejos.robotics.chassis.WheeledChassis;
-import lejos.robotics.navigation.MovePilot;
 
 /**
  * This is the Calibration Menu, named "Calibration Tools" in the Main Menu
