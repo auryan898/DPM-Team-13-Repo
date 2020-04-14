@@ -1,6 +1,6 @@
 package ca.mcgill.ecse211.ev3test;
 
-import static ca.mcgill.ecse211.ev3test.TestResources.*;
+import static ca.mcgill.ecse211.project.LocalResources.*;
 
 import ca.mcgill.ecse211.project.Display;
 import ca.mcgill.ecse211.project.LocalResources;
