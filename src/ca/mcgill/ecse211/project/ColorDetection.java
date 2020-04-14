@@ -8,7 +8,8 @@ import static ca.mcgill.ecse211.project.LocalResources.colorSensor;
  * <p>To minimize the undesirable variations in sensor recordings, this class will average several 
  * color samples, normalize its RGB value and then compare it to experimental data acquired 
  * beforehand. The error is modeled as normal distributions and so the color is determined by 
- * selecting the smallest z-score. See section 5.0 Methodologies in the "SYSTEM Final" document. 
+ * selecting the smallest z-score. See section 5.0 Methodologies in the "SYSTEM Final" document and 
+ * section 4.0 Thread Layout in the "Software Documentation Final" document. 
  *  
  * @author Norman Kong, Kaustav Das Sharma, Ryan Au
  */
@@ -168,7 +169,8 @@ public class ColorDetection {
    * @param x A given RGB value stored in a float array of the form [R value, G value, B value].
    * @return Returns the color of the given RGB value as a String.
    */
-  public static String determineColor(float x, float greenScore, float yellowScore, float orangeScore, float blueScore, float groundScore) {
+  public static String determineColor(float x, float greenScore, float yellowScore, 
+                                      float orangeScore, float blueScore, float groundScore) {
     
     float brightness = x;
     if (brightness < MIN_BRIGHTNESS_LEVEL || brightness > 1) {
