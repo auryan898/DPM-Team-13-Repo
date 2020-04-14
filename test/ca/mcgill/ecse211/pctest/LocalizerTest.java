@@ -68,13 +68,6 @@ public class LocalizerTest {
         double speed, float threshold,float range) tests
    */
   
-  @Test
-  //Scandist
-  public void testScanDist_success() {
-    
-    RangeReadings returned = testClass.scanDist(0, 10, 10, 1.0, 2 ,1);
-    assertNotNull(returned);
-  }
   
   
   
