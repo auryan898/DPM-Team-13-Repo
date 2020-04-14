@@ -8,11 +8,11 @@ import ca.mcgill.ecse211.tools.SubMenu;
 import lejos.hardware.Button;
 
 /**
- * This is the Main Menu of the robot. By default it contains two menu items,
- * the Demos Menu, and the Calibration Menu. If either of these two options are
- * chosen from the robot, that respective menu's options will be displayed. All
- * of the options of this class run in the original thread that calls select()
- * on this instance, and all menus afterward would do the same.
+ * This is the Main Menu of the robot. By default it contains three menu items,
+ * the Tests Menu, the Demos Menu, and the Calibration Menu. If either of these
+ * two options are chosen from the robot, that respective menu's options will be
+ * displayed. All of the options of this class run in the original thread that
+ * calls select() on this instance, and all menus afterward would do the same.
  * 
  * <p>
  * More menu options can be added to this list by adding to getInstance()

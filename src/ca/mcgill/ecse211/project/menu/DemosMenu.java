@@ -82,8 +82,7 @@ public class DemosMenu extends SubMenu {
     // An example of adding a demo/test to this class
     menu.addItem("WifiUsageDemo", new MenuAction() {
       public boolean action() {
-        // Any of the static resources from LocalResources can be used
-        System.out.println(tnr.getHeight() + "Red Tunnel Length");
+        wifiUsageDemo();
         return false;
       }
     });
@@ -97,5 +96,13 @@ public class DemosMenu extends SubMenu {
     });
 
     return menu;
+  }
+
+  /**
+   * This method provides a short example of using the wifi parameters, but also
+   * creating a custom MenuAction.
+   */
+  protected static void wifiUsageDemo() {
+    System.out.println(tnr.getHeight() + ":Length of Red Tunnel");
   }
 }

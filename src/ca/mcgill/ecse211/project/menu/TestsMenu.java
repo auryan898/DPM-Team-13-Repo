@@ -1,47 +1,57 @@
 package ca.mcgill.ecse211.project.menu;
 
 import ca.mcgill.ecse211.project.Display;
+import ca.mcgill.ecse211.project.LocalResources;
 import ca.mcgill.ecse211.tools.MenuAction;
 import ca.mcgill.ecse211.tools.SubMenu;
 
 /**
- * This is the Demos Menu, named "Robot Demos" from the Main Menu options. By
+ * This is the Tests Menu, named "Tests Menu" from the Main Menu options. By
  * default, this class contains an example item, and space is left to the next
  * programmers to fill in the further menu options that they wish to use.
  * 
  * <p>
  * This menu is intended to store menu options for controlling the robot for any
- * sort of test or demo that integrates or operates the other aspects of the
- * robot. An example is provided below, and in the code:
- * { @code
- * menu.addItem("SquareDriveDemo", new MenuAction() {
- * public boolean action() {
- * // Any of the static resources from LocalResources can be used
- * navigation.travel(4 * TILE_WIDTH);
- * navigation.rotate(-90);
- * navigation.travel(4 * TILE_WIDTH);
- * navigation.rotate(-90);
- * navigation.travel(4 * TILE_WIDTH);
- * navigation.rotate(-90);
- * navigation.travel(4 * TILE_WIDTH);
- * return false;
- * }
- * });
- * }
+ * sort of test that integrates or operates the other aspects of the
+ * robot.
+ * 
+ * <p>
+ * This menu is originally provided as an extra sub menu to store routines that
+ * are specifically for testing, however this menu is does not need to be used,
+ * and it does not need to be used for this purpose. Instead, every routine can
+ * be stored in the DemosMenu.
+ * 
+ * See @see ca.mcgill.ecse211.project.menu.DemosMenu for examples on using this
+ * menu system.
  * 
  * @author Ryan Au
  */
 public class TestsMenu extends SubMenu {
+  private static TestsMenu menu;
 
-  /**
-   * Place all of your test items here
-   */
   private TestsMenu() {
-    super("Run the Tests", new Display());
+    super("Tests Menu", LocalResources.display);
   }
 
-  public static TestsMenu createTests() {
-    final TestsMenu menu = new TestsMenu();
+  /**
+   * Creates and returns an instance of SubMenu that contains menu items specific
+   * to the TestsMenu in the form of MenuAction instances or MenuCommand
+   * instances.
+   * Each of these actions are essentially run in the main thread, but the user
+   * running the program gets to pick which commands to run at the times they wish
+   * via the menu displayed on the LCD of the EV3.
+   *
+   * <p>
+   * see @see ca.mcgill.ecse211.tools.MenuAction and see @see
+   * ca.mcgill.ecse211.tools.MenuCommand for more information on actions.
+   * 
+   * @return Returns the same instance of TestsMenu every time.
+   */
+  public static TestsMenu getInstance() {
+    if (menu != null) {
+      return menu;
+    }
+    menu = new TestsMenu();
 
     // --------------------Add items here--------------------
 
@@ -61,9 +71,13 @@ public class TestsMenu extends SubMenu {
     return menu;
   }
 
+  /**
+   * An example test method that can be run by a menu option.
+   * 
+   * @return true to exit the current menu, false to stay in it.
+   */
   public boolean test1() {
     // also can place code here, using the method in menu item
-
-    return false; // true exits the menu
+    return false; // return true exits the menu
   }
 }
