@@ -1,4 +1,4 @@
-package ca.mcgill.ecse211.ev3test;
+package ca.mcgill.ecse211.project.menu;
 
 import ca.mcgill.ecse211.project.Display;
 import ca.mcgill.ecse211.tools.MenuAction;
