@@ -1,6 +1,5 @@
 package ca.mcgill.ecse211.project;
 
-import static ca.mcgill.ecse211.project.LocalResources.absoluteHeading;
 
 import lejos.robotics.chassis.Chassis;
 import lejos.robotics.localization.OdometryPoseProvider;
@@ -89,7 +88,7 @@ public class Navigation extends MovePilot {
    * @param  y1 the y-coordinate of the second point
    * @return    the angle in degrees
    */
-  public double angleToPoint(double x0, double y0, double x1, double y1) {
+  public static double angleToPoint(double x0, double y0, double x1, double y1) {
     double dx = x1 - x0;
     double dy = y1 - y0;
     // arctan plus math to add 180 when theta is past 90 deg
@@ -106,7 +105,7 @@ public class Navigation extends MovePilot {
    * @param  y1 the y-coordinate of the second point
    * @return    the distance between the points
    */
-  public double distanceToPoint(double x0, double y0, double x1, double y1) {
+  public static double distanceToPoint(double x0, double y0, double x1, double y1) {
     double dx = x1 - x0;
     double dy = y1 - y0;
     return Math.sqrt(dx * dx + dy * dy);
@@ -153,7 +152,7 @@ public class Navigation extends MovePilot {
    * @return               the smallest angle needed to turn from the current
    *                       heading to the target
    */
-  public float minimumAngleToHeading(float currHeading, float targetHeading) {
+  public static float minimumAngleToHeading(float currHeading, float targetHeading) {
     float p1 = (float) (currHeading - targetHeading) % 360;
     return Math.abs(p1) > 180 ? p1 - 360 * Math.signum(p1) : p1;
   }
@@ -249,5 +248,24 @@ public class Navigation extends MovePilot {
    */
   public OdometryPoseProvider getOdometry() {
     return odometry;
+  }
+  
+
+  /**
+   * Ensures the heading is [0,360) degrees instead of [-180,180].
+   * It will work even if input is 0-360.
+   * 
+   * @return the heading in the specified format
+   */
+  public static float absoluteHeading(float heading) {
+    return (heading + 360) % 360; // [0-360)
+  }
+
+  /**
+   * Ensures the heading is between (-180,180], instead of [0,360).
+   */
+  public static float negativeHeading(float heading) {
+    float theta = absoluteHeading(heading) - 180;
+    return theta == -180 ? 180 : theta;
   }
 }

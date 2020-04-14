@@ -1,6 +1,8 @@
 package ca.mcgill.ecse211.project;
 
 import static ca.mcgill.ecse211.project.LocalResources.*;
+import static ca.mcgill.ecse211.project.Navigation.absoluteHeading;
+import static ca.mcgill.ecse211.project.Navigation.negativeHeading;
 
 import lejos.robotics.RangeReading;
 import lejos.robotics.RangeReadings;

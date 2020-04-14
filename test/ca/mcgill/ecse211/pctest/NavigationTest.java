@@ -4,7 +4,7 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-/*
+/**
  * To test the software logic without robot, our team split the methods into
  * logic
  * and readings. Later, we tested the logic using Junit. Whenever we could not
@@ -58,46 +58,6 @@ public class NavigationTest {
   public void testNavigationTurnTo3() {
     float actual = testClassNavigation.turnTo(90, 30);
     assertEquals(60.0, actual, 0.1);
-  }
-
-}
-
-class testClassNavigation {
-  /**
-   * TEST ONLY.
-   * This method causes the robot to travel to the absolute field location (x, y),
-   * specified in tile
-   * points. This method should continuously call turnTo(double theta) and then
-   * set
-   * the motor speed to forward (straight). This will make sure that your heading
-   * is updated
-   * until you reach your exact goal. This method will use the odometer.
-   * 
-   * @param x     the x coordinate
-   * @param y     the y coordinate
-   * @param dx    delta x
-   * @param delta y
-   */
-  public static double[] travelTo(double x, double y, double dx, double dy) {
-    // arctan plus math to add 180 when theta is past 90 deg
-    double theta = Math.toDegrees(Math.atan2(dy, dx));
-    double distance = Math.sqrt(dx * dx + dy * dy);
-    return new double[] { distance, theta };
-  }
-
-  /**
-   * TEST ONLY.
-   * This method causes the robot to turn (on point) to the absolute heading
-   * theta. This method
-   * should turn a MINIMAL angle to its target.
-   * 
-   * @param theta the absolute heading to turn to
-   */
-  public static float turnTo(double theta, int absoluteHeading) {
-    float heading = absoluteHeading;
-    float p1 = (float) (theta - heading) % 360;
-    float turnAngle = Math.abs(p1) > 180 ? p1 - 360 * Math.signum(p1) : p1;
-    return turnAngle;
   }
 
 }

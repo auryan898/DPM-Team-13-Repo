@@ -300,23 +300,6 @@ public class LocalResources {
     return nav;
   }
 
-  /**
-   * Ensures the heading is [0,360) degrees instead of [-180,180].
-   * It will work even if input is 0-360.
-   * 
-   * @return the heading in the specified format
-   */
-  public static float absoluteHeading(float heading) {
-    return (heading + 360) % 360; // [0-360)
-  }
-
-  /**
-   * Ensures the heading is between (-180,180], instead of [0,360).
-   */
-  public static float negativeHeading(float heading) {
-    float theta = absoluteHeading(heading) - 180;
-    return theta == -180 ? 180 : theta;
-  }
 
   /**
    * Resets the heading of the odometer to an angle.
