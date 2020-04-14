@@ -15,7 +15,7 @@ public class DemosMenu extends SubMenu {
     super("Run the Demos",LocalResources.display);
   }
   
-  // TODO: Includ javadoc and give examples for the Demo
+  // TODO: Includ javadoc and give examples for the Demos
   public static SubMenu createDemos() {
     SubMenu menu = new DemosMenu();
     

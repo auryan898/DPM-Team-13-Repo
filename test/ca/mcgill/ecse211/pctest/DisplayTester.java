@@ -9,9 +9,9 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import ca.mcgill.ecse211.ev3test.TestDisplay;
 import ca.mcgill.ecse211.project.Display;
 import ca.mcgill.ecse211.project.LocalResources;
-import ca.mcgill.ecse211.test.TestDisplay;
 
 public class DisplayTester {
 

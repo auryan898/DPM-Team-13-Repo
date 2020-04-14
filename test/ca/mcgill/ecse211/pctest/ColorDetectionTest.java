@@ -1,4 +1,4 @@
-package ca.mcgill.ecse211.test;
+package ca.mcgill.ecse211.pctest;
 
 import static org.junit.Assert.*;
 import org.junit.Test;

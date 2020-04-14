@@ -1,4 +1,4 @@
-package ca.mcgill.ecse211.test;
+package ca.mcgill.ecse211.ev3test;
 import static ca.mcgill.ecse211.project.LocalResources.END_PROGRAM;
 import static ca.mcgill.ecse211.project.LocalResources.lcd;
 

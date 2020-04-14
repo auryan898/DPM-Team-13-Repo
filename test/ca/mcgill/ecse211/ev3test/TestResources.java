@@ -1,4 +1,4 @@
-package ca.mcgill.ecse211.test;
+package ca.mcgill.ecse211.ev3test;
 
 import ca.mcgill.ecse211.project.Navigation; // Specifically using the same navigation from the
                                              // main project package
