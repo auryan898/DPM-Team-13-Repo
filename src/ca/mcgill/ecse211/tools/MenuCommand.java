@@ -6,6 +6,9 @@ package ca.mcgill.ecse211.tools;
  * left and right buttons of the EV3 to call setStatus(-1) and setStatus(+1),
  * and binds the down button to call action() of the MenuCommand instance.
  * 
+ * <p>
+ * The UP Button on the robot exits the generated prompt.
+ * 
  * @author Ryan Au
  *
  */

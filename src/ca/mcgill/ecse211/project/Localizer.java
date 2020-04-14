@@ -10,20 +10,27 @@ import lejos.robotics.navigation.MoveListener;
 import lejos.robotics.navigation.MovePilot;
 import lejos.robotics.navigation.MoveProvider;
 
-
 /**
  * Base localizer class that can read distances, color light values,
  * and has a distance scanning method.
  * 
- * <p>See section 2.3 Localization and Navigation from the "Software Documentation Final" document 
- * for  a description of how the class is used. Note that it is best to use the odometry, pilot, 
- * and navigation static instances to control/manage the robot's movement.
+ * <p>
+ * See section 2.3 Localization and Navigation from the "Software Documentation
+ * Final" document for a description of how the class is used. Note that it is
+ * best to use the odometry, pilot, and navigation static instances to
+ * control/manage the robot's movement.
+ * 
+ * <p>
+ * See section 5.0 on Recommendations for an overview of Continuous Localization
+ * and a way in which it could be implemented here.
  * 
  * @author Ryan Au auryan898@gmail.com
  *
  */
 public class Localizer implements Runnable, MoveListener {
   private static final long T_INTERVAL = 10;
+
+  private static final float DEFAULT_DISTANCE_TO_DETECT = 0;
 
   private float[] lightLeftSample = new float[3];
   private float[] lightRightSample = new float[3];
@@ -35,8 +42,10 @@ public class Localizer implements Runnable, MoveListener {
    */
   public void run() {
     while (!END_PROGRAM) {
-      // Place localizer thread code here:
-
+      // Place continuous localizer code here to periodically update useful values:
+      getLeftLightValue();
+      getRightLightValue();
+      getRange(DEFAULT_DISTANCE_TO_DETECT);
       // End localizer code.
       try {
         Thread.sleep(T_INTERVAL);
@@ -75,16 +84,15 @@ public class Localizer implements Runnable, MoveListener {
    */
   public float getRange(float threshold) {
     ultrasonicSensor.fetchSample(distSample, 0);
-    return getRange(threshold,distSample[0]);
+    return getRange(threshold, distSample[0]);
   }
 
-  
   /**
    * Gets the range detected by the ultrasonic sensor, within a given threshold.
    * FOR TEST PURPOSE ONLY.
    * 
    * @param  threshold the cm threshold of the range sensor
-   * @param range detected by ultrasonic sensor
+   * @param  range     detected by ultrasonic sensor
    * @return
    */
   public static float getRange(float threshold, float range) {
@@ -93,7 +101,7 @@ public class Localizer implements Runnable, MoveListener {
     } // invalid range value
     return range * 100;
   }
-  
+
   /**
    * Does a scan starting from one heading, stopping at regular intervals and
    * waiting, until it reaches another heading.
@@ -136,27 +144,38 @@ public class Localizer implements Runnable, MoveListener {
 
     return readings;
   }
-  
+
   // TODO: **Include localize in place methods
 
   @Override
   public void moveStarted(Move event, MoveProvider mp) {
     // TODO: Fill this provided moveListener method to localize and alter the
     // robot's position with each movement
-
+    // Continuous Localization
   }
 
   @Override
   public void moveStopped(Move event, MoveProvider mp) {
     // TODO: Fill this provided moveListener method to localize and alter the
     // robot's position with each movement
-
+    // Continuous Localization
   }
 
+  /**
+   * Returns the currently assigned millisecond delay period for the scanDist
+   * method.
+   * 
+   * @return millisecond delay time
+   */
   public static long getDistReadInterval() {
     return distReadInterval;
   }
 
+  /**
+   * Sets the millisecond delay period for the scanDist method.
+   * 
+   * @param distReadInterval millisecond delay time
+   */
   public void setDistReadInterval(long distReadInterval) {
     this.distReadInterval = distReadInterval;
   }

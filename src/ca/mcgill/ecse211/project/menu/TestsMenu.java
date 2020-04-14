@@ -4,6 +4,33 @@ import ca.mcgill.ecse211.project.Display;
 import ca.mcgill.ecse211.tools.MenuAction;
 import ca.mcgill.ecse211.tools.SubMenu;
 
+/**
+ * This is the Demos Menu, named "Robot Demos" from the Main Menu options. By
+ * default, this class contains an example item, and space is left to the next
+ * programmers to fill in the further menu options that they wish to use.
+ * 
+ * <p>
+ * This menu is intended to store menu options for controlling the robot for any
+ * sort of test or demo that integrates or operates the other aspects of the
+ * robot. An example is provided below, and in the code:
+ * { @code
+ * menu.addItem("SquareDriveDemo", new MenuAction() {
+ * public boolean action() {
+ * // Any of the static resources from LocalResources can be used
+ * navigation.travel(4 * TILE_WIDTH);
+ * navigation.rotate(-90);
+ * navigation.travel(4 * TILE_WIDTH);
+ * navigation.rotate(-90);
+ * navigation.travel(4 * TILE_WIDTH);
+ * navigation.rotate(-90);
+ * navigation.travel(4 * TILE_WIDTH);
+ * return false;
+ * }
+ * });
+ * }
+ * 
+ * @author Ryan Au
+ */
 public class TestsMenu extends SubMenu {
 
   /**
