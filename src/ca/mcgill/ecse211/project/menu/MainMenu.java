@@ -2,6 +2,7 @@ package ca.mcgill.ecse211.project.menu;
 
 import static ca.mcgill.ecse211.project.LocalResources.*;
 
+import ca.mcgill.ecse211.project.LocalResources;
 import ca.mcgill.ecse211.tools.MenuAction;
 import ca.mcgill.ecse211.tools.SubMenu;
 import lejos.hardware.Button;
@@ -20,9 +21,10 @@ public class MainMenu extends SubMenu {
   private SubMenu calibrationMenu;
 
   private MainMenu() {
-    super("Competition");
+    super("Competition",LocalResources.display);
   }
 
+  // TODO: javadoc
   public static MainMenu createMainMenu() {
     final MainMenu menu = new MainMenu();
     

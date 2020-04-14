@@ -5,7 +5,7 @@ import static ca.mcgill.ecse211.project.LocalResources.*;
 
 /**
  * Wrapper class for the TextLCD on the ev3 robot. Includes very useful methods 
- * such as writeNext(String line) or its equivalent println(String line) and a clear().
+ * such as writeNext(String line) or its equivalent println(String line) and a clear(). 
  * 
  * @author Ryan Au auryan898@gmail.com
  *
@@ -45,6 +45,7 @@ public class Display implements Runnable {
     resetIndex();
   }
   
+  // TODO: javadoc
   public void resetIndex(int val) {
     this.lineIndex = val;
   }
