@@ -12,14 +12,12 @@ import java.util.ResourceBundle;
  * file. Edit the fieldlayout1.properties file, provided as an example, to setup
  * your own offline playing field parameters.
  * 
- * <p>
- * Use FieldLayouts to load offline versions of the wifiParameters, instead of
+ * <p>Use FieldLayouts to load offline versions of the wifiParameters, instead of
  * the usual call to receiveWifiParameters(). This is useful if the user cannot
  * run the laptop/pc server for some reason, but still wishes to test features
  * that rely on playing field parameters in the code.
  * 
- * <p>
- * Example:
+ * <p>Example:
  * { @code
  * wifiParameters = FieldLayouts.getPlayingFieldLayout(resource_path);
  * receiveWifiParameters(); // This is now skipped because of the previous line
