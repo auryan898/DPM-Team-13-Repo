@@ -71,16 +71,19 @@ public class Main {
       System.out.println("Starting main program");
     }
     // -----Begin writing your code below this line-----
-    
+
     // Either run code such as:
+    // squareDriverTest();
 
     // Or Initialize the MainMenu (see this class for example usage)
     MainMenu mainMenu = MainMenu.getInstance();
+    // And place your code in any of the menu classes: DemosMenu, TestsMenu, CalibrationMenu
+    // as menu options to be selected.
 
     // Start main thread
     while (!END_PROGRAM) {
       // Displays the options for the MainMenu (ca.mcgill.ecse211.project.menu)
-      END_PROGRAM = mainMenu.select();
+      END_PROGRAM = mainMenu.select(); // comment this out if not using menus
 
       try {
         Thread.sleep(T_INTERVAL);
@@ -90,5 +93,19 @@ public class Main {
       }
     }
 
+  }
+
+  /**
+   * An example of the square driver test, that can be used for calibratin robot
+   * parameters, or testing odometry. It can be called from the main method.
+   */
+  private static void squareDriverTest() {
+    navigation.travel(4 * TILE_WIDTH);
+    navigation.rotate(-90);
+    navigation.travel(4 * TILE_WIDTH);
+    navigation.rotate(-90);
+    navigation.travel(4 * TILE_WIDTH);
+    navigation.rotate(-90);
+    navigation.travel(4 * TILE_WIDTH);
   }
 }
