@@ -5,17 +5,14 @@ import static ca.mcgill.ecse211.project.LocalResources.redTeam;
 import java.util.ArrayList;
 
 /**
- * This class contains the searching algorithm proposed by Team 13.
+ * This class is a template for the proposed searching algorithm.
  * 
  * <p>The robot will rotate and read ultrasonic distances to detect where the
- * stranded vehicle
- * might be. It will then travel to that waypoint and determine whether or not
- * it is the vehicle. If
- * it is, it will call the attachment method. If not, it will perform a new scan
- * and continue to the
- * next detected objects. For documentation on algorithms to be implemented, see
- * section 5.3 Search
- * Algorithm from the "Software Documentation Final" document.
+ * stranded vehicle might be, which is what we call "scanning". It will then travel to the 
+ * potential waypoints that may have the vehicle, and determine whether or not it is the vehicle. If
+ * it is, the robot will use the Attachment class.  If not, it will perform a new scan and continue 
+ * to the next detected objects. For documentation on algorithms to be implemented, see section 1.0,
+ * the sequence diagram from section 4.0, and 6.3 from the "Software Documentation Final" document.
  * 
  * @author Norman Kong, Ryan Au, Kaustav Das Sharma
  *

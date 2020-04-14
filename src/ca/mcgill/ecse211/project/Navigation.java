@@ -11,9 +11,9 @@ import lejos.robotics.navigation.Pose;
  * and y (cm) and turn to any angle heading, positive or negative angle. Forward
  * should be 90 degrees, and right is 0 degrees.
  * 
- * <p>
- * See sections 2.3, 3.0, 5.1 and 5.2 from the "Software Documentation Final"
- * document for how the class is used and algorithms to be implemented.
+ * <p>See sections 1.0, 3.0, 3.3 and 4.0 from the "Software Documentation Final document to see how 
+ * the class is used. See sections 6.1 and 6.2 from the same document to see the algorithms to be 
+ * implemented.
  * 
  * @author Ryan Au auryan898@gmail.com
  */
@@ -40,8 +40,7 @@ public class Navigation extends MovePilot {
    * then set the motor speed to forward (straight). This will make sure that your
    * heading is updated until you reach your exact goal.
    * 
-   * <p>
-   * If immediateReturn is true, then this method returns immediately, running its
+   * <p>If immediateReturn is true, then this method returns immediately, running its
    * actions concurrently through the existing thread(s) which control the
    * motors. If false, this method will return only when it has completed its
    * commands and stopped moving.
@@ -68,8 +67,7 @@ public class Navigation extends MovePilot {
    * then set the motor speed to forward (straight). This will make sure that your
    * heading is updated until you reach your exact goal.
    * 
-   * <p>
-   * immediateReturn is false by default.
+   * <p>immediateReturn is false by default.
    * 
    * @param x the x coordinate
    * @param y the y coordinate
@@ -115,8 +113,7 @@ public class Navigation extends MovePilot {
    * This method causes the robot to turn (on point) to the absolute heading
    * theta. This method should turn the MINIMAL angle to its target.
    * 
-   * <p>
-   * If immediateReturn is true, then this method returns immediately, running its
+   * <p>If immediateReturn is true, then this method returns immediately, running its
    * actions concurrently through the existing thread(s) which control the
    * motors. If false, this method will return only when it has completed its
    * commands and stopped moving.
@@ -133,8 +130,7 @@ public class Navigation extends MovePilot {
    * This method causes the robot to turn (on point) to the absolute heading
    * theta. This method should turn the MINIMAL angle to its target.
    * 
-   * <p>
-   * immediateReturn is false by default.
+   * <p>immediateReturn is false by default.
    * 
    * @param theta the heading to turn to, 0 degrees is East
    */

@@ -16,14 +16,12 @@ import lejos.robotics.navigation.MoveProvider;
  * Base localizer class that can read distances, color light values,
  * and has a distance scanning method.
  * 
- * <p>
- * See section 2.3 Localization and Navigation from the "Software Documentation
- * Final" document for a description of how the class is used. Note that it is
- * best to use the odometry, pilot, and navigation static instances to
+ * <p>See section 3.3 Localization and Navigation and the sequence diagram from section 4.0 Thread
+ * Layout, both from the "Software Documentation Final" document, for a description of how the class
+ * is used. Note that it is best to use the odometry, pilot, and navigation static instances to
  * control/manage the robot's movement.
  * 
- * <p>
- * See section 5.0 on Recommendations for an overview of Continuous Localization
+ * <p>See section 5.0 on Recommendations for an overview of Continuous Localization
  * and a way in which it could be implemented here.
  * 
  * @author Ryan Au auryan898@gmail.com

@@ -11,33 +11,23 @@ import ca.mcgill.ecse211.project.menu.MainMenu;
  * class will write a single set of commands for the robot to run in succession
  * for this project, and that is possible to do. However a menu system has been
  * implemented by creating subclasses of @see ca.mcgill.ecse211.tools.SubMenu,
- * and then adding menu items to that menu to be executed.
+ * and then adding menu items (that are to be executed) to that menu. See 
+ * @see ca.mcgill.ecse211.project.menu for more information on each existing menu.
  * 
- * Go to @see ca.mcgill.ecse211.project.menu for more information on each
- * existing menu
- * 
- * <p>
- * The goal of the project is to create a robot that can search for a stranded
- * vehicle, attach to
- * it and return it back to the starting base. A visual provided by the client
- * is shown here:
+ * <p>The goal of the project is to create a robot that can search for a stranded
+ * vehicle, attach to it and return it back to the starting base. A visual provided
+ * by the client is shown here:
  * 
  * <img src="" placeholder="image of competition playing field">
  * 
- * <p>
- * The program begins by receiving the game parameters from the game marshal.
- * The robot will
- * localize, travel across the tunnel to the search zone, and search for its
- * assigned stranded
- * vehicle. Once found, it will attach to the vehicle and return to the zone in
- * which it started.
- * The task must be completed within 5 minutes, and without colliding into any
- * obstacle.
+ * <p>The program begins by receiving the game parameters from the game marshal. The robot must 
+ * localize, travel across the tunnel to the search zone, and search for its assigned stranded 
+ * vehicle. Once found, it will attach to the vehicle and return to the zone in which it started. 
+ * The task must be completed within 5 minutes, and without colliding into any obstacle, including 
+ * the opposing team's robot.
  * 
- * <p>
- * Please see the document "Software Documentation Final" for further details of
- * the software
- * architecture and its functionality.
+ * <p>Please see the document "Software Documentation Final" for further details of
+ * the software architecture and its functionality.
  * 
  * @author Ryan Au auryan898@gmail.com
  *
