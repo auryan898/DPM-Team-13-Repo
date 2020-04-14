@@ -147,13 +147,13 @@ public class Navigation extends MovePilot {
    * heading. The result is either negative or positive, where positive is
    * counter-clockwise.
    * 
-   * @param  currHeading   the current heading in degrees
-   * @param  targetHeading the target heading in degrees
+   * @param  targetHeading   the current heading in degrees
+   * @param  currHeading the target heading in degrees
    * @return               the smallest angle needed to turn from the current
    *                       heading to the target
    */
-  public static float minimumAngleToHeading(float currHeading, float targetHeading) {
-    float p1 = (float) (currHeading - targetHeading) % 360;
+  public static float minimumAngleToHeading(float targetHeading, float currHeading) {
+    float p1 = (float) (targetHeading - currHeading) % 360;
     return Math.abs(p1) > 180 ? p1 - 360 * Math.signum(p1) : p1;
   }
 
@@ -265,7 +265,10 @@ public class Navigation extends MovePilot {
    * Ensures the heading is between (-180,180], instead of [0,360).
    */
   public static float negativeHeading(float heading) {
-    float theta = absoluteHeading(heading) - 180;
+    float theta = absoluteHeading(heading) % 360;
+    if (theta > 180) {
+      theta -= 360;
+    }
     return theta == -180 ? 180 : theta;
   }
 }

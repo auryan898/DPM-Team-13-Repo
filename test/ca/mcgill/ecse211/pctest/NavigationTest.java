@@ -4,6 +4,8 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+import ca.mcgill.ecse211.project.Navigation;
+
 /**
  * To test the software logic without robot, our team split the methods into
  * logic
@@ -20,44 +22,39 @@ public class NavigationTest {
    * 
    */
   // Success
+
   @Test
-  public void testNavigationTravelto() {
-    double[] actuals = testClassNavigation.travelTo(0, 0, 1, 1);
-    assertArrayEquals(new double[] { Math.sqrt(2), 45 }, actuals, 0.0001);
+  public void testMinimumAngle() {
+    assertEquals(179, Navigation.minimumAngleToHeading(0, 181), 0.001);
+    assertEquals(-179, Navigation.minimumAngleToHeading(0, 179), 0.001);
+    assertEquals(180, Navigation.minimumAngleToHeading(0, -180), 0.001);
+
   }
 
   @Test
-  public void testNavigationTravelto2() {
-    double[] actuals = testClassNavigation.travelTo(0, 0, 1, 1);
-    assertNotNull(actuals);
+  public void testAbsoluteHeading() {
+    assertEquals(180, Navigation.absoluteHeading(180), 0.001);
+    assertEquals(180, Navigation.absoluteHeading(-180), 0.001);
+    assertEquals(340, Navigation.absoluteHeading(-20), 0.001);
   }
 
   @Test
-  public void testNavigationTravelto3() {
-    double[] actuals = testClassNavigation.travelTo(0, 0, 1, 1);
-    assertArrayEquals(new double[] { Math.sqrt(2), 45 }, actuals, 0.1);
-  }
-
-  /*
-   * turnTo(double theta, int absoluteHeading) tests
-   */
-  // Success
-  @Test
-  public void testNavigationTurnTo() {
-    float actual = testClassNavigation.turnTo(30, 90);
-    assertEquals(-60.0, actual, 0.0001);
+  public void testNegativeHeading() {
+    assertEquals(-90, Navigation.negativeHeading(270), 0.001);
+    assertEquals(-179, Navigation.negativeHeading(181), 0.001);
+    assertEquals(-1, Navigation.negativeHeading(359), 0.001);
   }
 
   @Test
-  public void testNavigationTurnTo2() {
-    float actual = testClassNavigation.turnTo(90, 30);
-    assertEquals(60.0, actual, 0.0001);
+  public void testAngleToPoint() {
+    assertEquals(90, Navigation.angleToPoint(0, 0, 0, 1), 0.001);
+    // Add more test cases for different angles
   }
 
   @Test
-  public void testNavigationTurnTo3() {
-    float actual = testClassNavigation.turnTo(90, 30);
-    assertEquals(60.0, actual, 0.1);
+  public void testDistanceToPoint() {
+    assertEquals(5, Navigation.distanceToPoint(0, 0, 3, 4), 0.001);
+ // Add more test cases for different distances
   }
 
 }
