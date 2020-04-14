@@ -53,8 +53,7 @@ public class FieldLayouts {
    * pairs. Throws exception when a value in the bundle cannot be parsed as a
    * BigDecimal format.
    * 
-   * <p>
-   * Accepts filename of format 'ca.mcgill.ecse211.project.fieldlayout1' when the
+   * <p>Accepts filename of format 'ca.mcgill.ecse211.project.fieldlayout1' when the
    * containing package is 'ca.mcgill.ecse211.project' and the filename is
    * actually 'fieldlayout1.properties'.
    * 
