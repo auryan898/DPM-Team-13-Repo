@@ -1,6 +1,5 @@
 package ca.mcgill.ecse211.project;
 
-import lejos.hardware.lcd.TextLCD;
 import static ca.mcgill.ecse211.project.LocalResources.*;
 
 /**

@@ -9,8 +9,7 @@ import lejos.utility.TextMenu;
  * Creates a menu that allows the user to add actions/methods as items to the
  * list displayed on the EV3.
  * 
- * <p>
- * This menu system can be extended by first instantiating a SubMenu object,
+ * <p>This menu system can be extended by first instantiating a SubMenu object,
  * then performing addItem() on this object to add menu items. These menu items
  * are always objects that implement the MenuAction and MenuCommand interfaces.
  * 
