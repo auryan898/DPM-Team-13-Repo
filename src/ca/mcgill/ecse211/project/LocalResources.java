@@ -162,7 +162,7 @@ public class LocalResources {
 
   static {
     navigation = initNavigation(WHEEL_RADIUS, BASE_WIDTH, motorLeft, motorRight);
-    pilot = navigation.getPilot();
+    pilot = (MovePilot)navigation;
     odometry = navigation.getOdometry();
     navigation.addMoveListener(localizer);
 
