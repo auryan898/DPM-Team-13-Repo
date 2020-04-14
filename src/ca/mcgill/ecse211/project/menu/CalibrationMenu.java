@@ -20,7 +20,7 @@ public class CalibrationMenu extends SubMenu {
   public CalibrationMenu() {
     super("Calibration Tools",LocalResources.display);
   }
-  // TODO: javadoc
+  // TODO: Include javadoc and refactor example calibration tests here
   public static SubMenu createCalibrations() {
     final CalibrationMenu menu = new CalibrationMenu();
     // Tests Wheel Radius, it should move backwards one tile.
